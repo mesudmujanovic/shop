@@ -189,3 +189,61 @@ chshop/
 ├── 📁 src/test/java/                        🧪
 ├── pom.xml                                  📦
 └── 📁 target/                               🏗️
+
+👤 User
+├── id (PK)
+├── username
+├── email
+├── password
+├── role (USER/ADMIN)
+├── createdDate
+└── updatedDate
+    │
+    ├── 1:M 📦 Order
+    │       ├── id (PK)
+    │       ├── user_id (FK)
+    │       ├── orderNumber
+    │       ├── totalAmount
+    │       ├── status
+    │       └── createdDate
+    │           │
+    │           ├── 1:M 📝 OrderItem
+    │           │       ├── id (PK)
+    │           │       ├── order_id (FK)
+    │           │       ├── product_id (FK)
+    │           │       ├── quantity
+    │           │       └── price
+    │           │
+    │           └── 1:1 💳 Payment
+    │                   ├── id (PK)
+    │                   ├── order_id (FK)
+    │                   ├── amount
+    │                   ├── method
+    │                   └── status
+    │
+    └── 1:1 🛒 Cart
+            ├── id (PK)
+            ├── user_id (FK)
+            └── createdDate
+                │
+                └── 1:M 🎴 CartItem
+                        ├── id (PK)
+                        ├── cart_id (FK)
+                        ├── product_id (FK)
+                        └── quantity
+
+🗂️ Category
+├── id (PK)
+├── name
+├── description
+└── parent_id (FK)
+    │
+    └── 1:M 📦 Product
+            ├── id (PK)
+            ├── category_id (FK)
+            ├── name
+            ├── description
+            ├── price
+            ├── stock
+            ├── imageUrl
+            └── specifications

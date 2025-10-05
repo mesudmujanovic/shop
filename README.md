@@ -65,7 +65,7 @@ shop-frontend/
 │   │   │       ├── order-list/                📄
 │   │   │       └── order-details/             🔍
 │   │   │
-│   │   ├── app-routing.module.ts              🗺️
+│   │   ├── app-routing.module.ts              🗺️  
 │   │   ├── app.component.ts                   🎪
 │   │   └── app.module.ts                      📦
 │   │

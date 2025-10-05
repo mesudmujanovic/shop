@@ -81,3 +81,111 @@ shop-frontend/
 ├── angular.json                               ⚙️
 ├── package.json                               📦
 └── tsconfig.json                              ⚙️
+
+
+chshop/
+├── 📁 src/main/java/com/shop/
+│   ├── 📁 config/                            # KONFIGURACIJE
+│   │   ├── SecurityConfig.java              🛡️
+│   │   ├── WebConfig.java                   🌐
+│   │   ├── SwaggerConfig.java               📖
+│   │   ├── CorsConfig.java                  🔄
+│   │   └── DatabaseConfig.java              🗄️
+│   │
+│   ├── 📁 controller/                       # REST API CONTROLLERS
+│   │   ├── AuthController.java              🔐
+│   │   ├── UserController.java              👤
+│   │   ├── ProductController.java           📦
+│   │   ├── CategoryController.java          🗂️
+│   │   ├── CartController.java              🛒
+│   │   ├── OrderController.java             📋
+│   │   ├── PaymentController.java           💳
+│   │   ├── AdminController.java             👑
+│   │   └── FileUploadController.java        📤
+│   │
+│   ├── 📁 service/                          # BUSINESS LOGIC
+│   │   ├── 📁 impl/                         # IMPLEMENTACIJE
+│   │   │   ├── UserServiceImpl.java         👤
+│   │   │   ├── ProductServiceImpl.java      📦
+│   │   │   ├── CategoryServiceImpl.java     🗂️
+│   │   │   ├── CartServiceImpl.java         🛒
+│   │   │   ├── OrderServiceImpl.java        📋
+│   │   │   ├── PaymentServiceImpl.java      💳
+│   │   │   └── EmailServiceImpl.java        📧
+│   │   │
+│   │   ├── UserService.java                 👤
+│   │   ├── ProductService.java              📦
+│   │   ├── CategoryService.java             🗂️
+│   │   ├── CartService.java                 🛒
+│   │   ├── OrderService.java                📋
+│   │   ├── PaymentService.java              💳
+│   │   └── EmailService.java                📧
+│   │
+│   ├── 📁 repository/                       # DATA ACCESS LAYER
+│   │   ├── UserRepository.java              👤
+│   │   ├── ProductRepository.java           📦
+│   │   ├── CategoryRepository.java          🗂️
+│   │   ├── CartRepository.java              🛒
+│   │   ├── OrderRepository.java             📋
+│   │   ├── OrderItemRepository.java         📝
+│   │   ├── PaymentRepository.java           💳
+│   │   └── AddressRepository.java           🏠
+│   │
+│   ├── 📁 model/                            # ENTITETI
+│   │   ├── User.java                        👤
+│   │   ├── Product.java                     📦
+│   │   ├── Category.java                    🗂️
+│   │   ├── Cart.java                        🛒
+│   │   ├── CartItem.java                    🎴
+│   │   ├── Order.java                       📋
+│   │   ├── OrderItem.java                   📝
+│   │   ├── Payment.java                     💳
+│   │   ├── Address.java                     🏠
+│   │   └── Role.java                        🎭
+│   │
+│   ├── 📁 dto/                              # DATA TRANSFER OBJECTS
+│   │   ├── 📁 request/                      📥
+│   │   │   ├── LoginRequest.java            🔐
+│   │   │   ├── RegisterRequest.java         📝
+│   │   │   ├── ProductRequest.java          📦
+│   │   │   ├── OrderRequest.java            📋
+│   │   │   └── PaymentRequest.java          💳
+│   │   │
+│   │   ├── 📁 response/                     📤
+│   │   │   ├── AuthResponse.java            🔑
+│   │   │   ├── UserResponse.java            👤
+│   │   │   ├── ProductResponse.java         📦
+│   │   │   ├── OrderResponse.java           📋
+│   │   │   └── ApiResponse.java             📡
+│   │   │
+│   │   └── 📁 mapper/                       🔄
+│   │       ├── UserMapper.java              👤
+│   │       ├── ProductMapper.java           📦
+│   │       └── OrderMapper.java             📋
+│   │
+│   ├── 📁 security/                         # SECURITY
+│   │   ├── JwtUtil.java                     🔑
+│   │   ├── JwtRequestFilter.java            🎯
+│   │   ├── UserDetailsServiceImpl.java      👤
+│   │   ├── AuthEntryPointJwt.java           ⚠️
+│   │   └── WebSecurityConfig.java           🛡️
+│   │
+│   ├── 📁 exception/                        # EXCEPTION HANDLING
+│   │   ├── GlobalExceptionHandler.java      🎪
+│   │   ├── ResourceNotFoundException.java   ❌
+│   │   ├── BadRequestException.java         ⚠️
+│   │   └── CustomException.java             💥
+│   │
+│   └── ShopApplication.java                 🚀
+│
+├── 📁 src/main/resources/
+│   ├── application.properties               ⚙️
+│   ├── application-dev.properties           🛠️
+│   ├── application-prod.properties          🚀
+│   ├── 📁 static/                           🖼️
+│   ├── 📁 templates/                        📧
+│   └── data.sql                             🗄️
+│
+├── 📁 src/test/java/                        🧪
+├── pom.xml                                  📦
+└── 📁 target/                               🏗️

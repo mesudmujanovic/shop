@@ -1,0 +1,21 @@
+
+├── checkout/                     🧾
+│   ├── Address form             🏠
+│   ├── Order summary           📝
+│   └── Payment method          💳
+├── payment/                     🏦
+│   ├── Swiss Bank form         🇨🇭
+│   ├── Card details            💳
+│   └── Secure payment          🔒
+└── order-confirmation/         ✅
+    ├── Order details           📋
+    ├── Tracking info          🚚
+    └── Continue shopping      🛍️
+
+🖥️ Backend Payment Kontroleri:
+├── PaymentController.java
+│   ├── POST /api/payments/initiate   🏁
+│   ├── GET /api/payments/{id}/status 🔍
+│   └── POST /api/payments/webhook    📞
+└── SwissBankService.java
+    └── Bank API integration   🌐

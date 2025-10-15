@@ -1,4 +1,6 @@
 package com.chsoph.entity;
 
-public class Role {
+public enum Role {
+    USER,
+    ADMIN
 }

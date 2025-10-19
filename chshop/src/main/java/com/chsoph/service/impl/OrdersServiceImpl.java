@@ -29,53 +29,55 @@ public class OrdersServiceImpl implements OrderService {
     @Transactional
     public Orders placeOrder(Long userId, OrderRequest orderRequest) {
         User user = userRepository.findById(userId)
-            .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         Orders orders = Orders.builder()
-            .user(user)
-            .orderNumber(UUID.randomUUID().toString())
-            .status("NEW")
-            .createdDate(LocalDateTime.now())
-            .build();
+                .user(user)
+                .orderNumber(UUID.randomUUID().toString())
+                .status("PENDING_PAYMENT") // Novi status
+                .createdDate(LocalDateTime.now())
+                .build();
 
         orders = ordersRepository.save(orders);
         final Orders savedOrders = orders;
 
         List<OrderItem> orderItems = orderRequest.getItems().stream()
-            .map(itemRequest -> {
-                Product product = productRepository.findById(itemRequest.getProductId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+                .map(itemRequest -> {
+                    Product product = productRepository.findById(itemRequest.getProductId())
+                            .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
 
-                return OrderItem.builder()
-                    .order(savedOrders)
-                    .product(product)
-                    .quantity(itemRequest.getQuantity())
-                    .price(product.getPrice().multiply(BigDecimal.valueOf(itemRequest.getQuantity())))
-                    .build();
-            })
-            .collect(Collectors.toList());
+                    return OrderItem.builder()
+                            .order(savedOrders)
+                            .product(product)
+                            .quantity(itemRequest.getQuantity())
+                            .price(product.getPrice().multiply(BigDecimal.valueOf(itemRequest.getQuantity())))
+                            .build();
+                })
+                .collect(Collectors.toList());
 
         orderItemRepository.saveAll(orderItems);
 
         BigDecimal totalAmount = orderItems.stream()
-            .map(OrderItem::getPrice)
-            .reduce(BigDecimal.ZERO, BigDecimal::add);
+                .map(OrderItem::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         orders.setTotalAmount(totalAmount);
         orders.setOrderItems(orderItems);
         orders = ordersRepository.save(orders);
 
+        // Kreiraj payment sa Stripe podacima
         Payment payment = Payment.builder()
-            .order(orders)
-            .amount(totalAmount)
-            .method("NOT_SET")
-            .status("PENDING")
-            .build();
+                .order(orders)
+                .amount(totalAmount)
+                .method("CARD") // Podrazumevana metoda
+                .status("PENDING")
+                .createdDate(LocalDateTime.now())
+                .build();
 
         paymentRepository.save(payment);
-
         orders.setPayment(payment);
-        return orders;
+
+        return ordersRepository.save(orders);
     }
 
     @Override

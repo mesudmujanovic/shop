@@ -18,7 +18,7 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<Orders> placeOrderFromCart(
             @RequestParam String sessionId,
             @RequestBody GuestOrderRequest guestOrderRequest) {

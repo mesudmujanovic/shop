@@ -1,34 +1,70 @@
+<!-- payment.component.html -->
 <div class="payment-container">
-  <h2>Stripe Plaćanje</h2>
+  <h2>Plaćanje</h2>
 
-  <div class="form-group">
-    <label>Order ID:</label>
-    <input type="number" [(ngModel)]="orderId" class="form-control" placeholder="Unesite ID porudžbine">
+  <div *ngIf="cart && cart.items.length > 0" class="order-summary">
+    <h3>Pregled porudžbine</h3>
+    <div *ngFor="let item of cart.items" class="order-item">
+      <span>{{ item.productName }} x {{ item.quantity }}</span>
+      <span>{{ item.totalPrice | currency:'CHF' }}</span>
+    </div>
+    <div class="order-total">
+      <strong>Ukupno: {{ cart.totalPrice | currency:'CHF' }}</strong>
+    </div>
   </div>
 
-  <button (click)="createPaymentIntent()" [disabled]="isLoading" class="btn btn-primary">
-    {{ isLoading ? 'Kreiranje...' : 'Kreiraj Payment Intent' }}
+  <div class="guest-info">
+    <h3>Podaci za dostavu</h3>
+    
+    <div class="form-group">
+      <label>Email *</label>
+      <input type="email" [(ngModel)]="guestOrder.email" class="form-control" placeholder="unesite@email.com">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Ime *</label>
+        <input type="text" [(ngModel)]="guestOrder.firstName" class="form-control" placeholder="Unesite ime">
+      </div>
+
+      <div class="form-group">
+        <label>Prezime *</label>
+        <input type="text" [(ngModel)]="guestOrder.lastName" class="form-control" placeholder="Unesite prezime">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Adresa *</label>
+      <input type="text" [(ngModel)]="guestOrder.address" class="form-control" placeholder="Unesite adresu">
+    </div>
+
+    <div class="form-group">
+      <label>Telefon *</label>
+      <input type="tel" [(ngModel)]="guestOrder.phone" class="form-control" placeholder="Unesite telefon">
+    </div>
+  </div>
+
+  <button 
+    (click)="createOrder()" 
+    [disabled]="isLoading || !cart || cart.items.length === 0"
+    class="btn btn-primary">
+    {{ isLoading ? 'Kreiranje...' : 'Kreiraj Porudžbinu' }}
   </button>
 
   <div *ngIf="paymentIntent" class="payment-section">
     <h3>Podaci za plaćanje</h3>
-    <p><strong>Iznos:</strong> ${{ paymentIntent.amount }}</p>
-    <p><strong>Valuta:</strong> {{ paymentIntent.currency }}</p>
     
     <div class="card-section">
       <label>Podaci kartice:</label>
-      <div id="card-element" class="card-element">
-        <!-- Stripe će ovde dodati svoje elemente -->
-      </div>
-      <small class="text-muted">Unesite podatke test kartice: 4242424242424242</small>
+      <div id="card-element" class="card-element"></div>
+      <small class="text-muted">Test kartica: 4242424242424242</small>
     </div>
 
-    <button (click)="processPayment()" [disabled]="isLoading" class="btn btn-success">
-      {{ isLoading ? 'Obrađujem...' : 'Plati' }}
-    </button>
-
-    <button (click)="checkPaymentStatus()" class="btn btn-info">
-      Proveri Status
+    <button 
+      (click)="processPayment()" 
+      [disabled]="isLoading" 
+      class="btn btn-success">
+      {{ isLoading ? 'Obrađujem...' : 'Plati ' + (paymentIntent.amount | currency:paymentIntent.currency) }}
     </button>
   </div>
 
@@ -38,10 +74,5 @@
 
   <div *ngIf="paymentStatus" class="status-info">
     <h4>Status Plaćanja: {{ paymentStatus }}</h4>
-  </div>
-
-  <!-- Debug info -->
-  <div *ngIf="!isStripeInitialized" class="debug-info">
-    <small>Stripe se inicijalizuje...</small>
   </div>
 </div>

@@ -1,0 +1,68 @@
+<!-- cart.component.html -->
+<div class="cart-container">
+  <h2>Korpa</h2>
+
+  <div *ngIf="isLoading" class="loading">Učitavanje korpe...</div>
+
+  <div *ngIf="message" [class]="message.includes('Greška') ? 'error-message' : 'success-message'">
+    {{ message }}
+  </div>
+
+  <div *ngIf="cart && cart.items.length > 0; else emptyCart" class="cart-content">
+    <div class="cart-items">
+      <div *ngFor="let item of cart.items" class="cart-item">
+        <div class="item-info">
+          <h4>{{ item.productName }}</h4>
+          <p class="item-price">{{ item.productPrice | currency:'CHF' }}</p>
+        </div>
+        
+        <div class="item-controls">
+          <div class="quantity-controls">
+            <button (click)="updateQuantity(item, item.quantity - 1)" class="btn btn-sm">-</button>
+            <span class="quantity">{{ item.quantity }}</span>
+            <button (click)="updateQuantity(item, item.quantity + 1)" class="btn btn-sm">+</button>
+          </div>
+          
+          <div class="item-total">
+            {{ item.totalPrice | currency:'CHF' }}
+          </div>
+          
+          <button 
+            (click)="removeFromCart(item.productId)" 
+            class="btn btn-danger btn-sm">
+            Ukloni
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart-summary">
+      <div class="summary-row">
+        <strong>Ukupno proizvoda:</strong>
+        <span>{{ getTotalItems() }}</span>
+      </div>
+      <div class="summary-row total">
+        <strong>Ukupan iznos:</strong>
+        <span>{{ getTotalPrice() | currency:'CHF' }}</span>
+      </div>
+      
+      <div class="cart-actions">
+        <button (click)="clearCart()" class="btn btn-warning">
+          Isprazni Korpu
+        </button>
+        <button routerLink="/checkout" class="btn btn-success">
+          Nastavi na Plaćanje
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #emptyCart>
+    <div class="empty-cart">
+      <p>Vaša korpa je prazna.</p>
+      <button routerLink="/products" class="btn btn-primary">
+        Pogledaj Proizvode
+      </button>
+    </div>
+  </ng-template>
+</div>

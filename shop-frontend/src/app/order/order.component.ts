@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { OrderRequest, PaymentService } from '../payment.service';
+import { OrderRequest, PaymentService } from '../service/payment.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 

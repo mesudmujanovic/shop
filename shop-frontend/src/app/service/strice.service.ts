@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { loadStripe, Stripe, StripeCardElement } from '@stripe/stripe-js';
-import { environment } from '../environment';
+import { environment } from '../../environment';
 
 @Injectable({
   providedIn: 'root'

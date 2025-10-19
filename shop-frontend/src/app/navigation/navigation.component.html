@@ -1,0 +1,14 @@
+<!-- navigation.component.html -->
+<nav class="navbar">
+  <div class="nav-brand">
+    <a routerLink="/">MyShop</a>
+  </div>
+  
+  <div class="nav-links">
+    <a routerLink="/products" routerLinkActive="active">Proizvodi</a>
+    <a routerLink="/cart" routerLinkActive="active">
+      Korpa
+      <span class="cart-badge" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+    </a>
+  </div>
+</nav>

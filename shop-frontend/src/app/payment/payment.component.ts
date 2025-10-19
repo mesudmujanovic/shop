@@ -1,80 +1,113 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { PaymentService } from '../payment.service';
-import { StriceService } from '../strice.service';
-import { FormsModule } from '@angular/forms';
+// payment.component.ts
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { GuestOrderRequest, OrderService } from '../service/order.service';
+import { PaymentService } from '../service/payment.service';
+import { StriceService } from '../service/strice.service';
+import { CartService } from '../service/cart.service';
 
 @Component({
   selector: 'app-payment',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.scss'] // <-- ispravljeno
+  styleUrls: ['./payment.component.scss']
 })
-export class PaymentComponent implements OnInit, OnDestroy {
-  orderId: number | null = null;
+export class PaymentComponent implements OnInit {
+  guestOrder: GuestOrderRequest = {
+    email: '',
+    firstName: '',
+    lastName: '',
+    address: '',
+    phone: ''
+  };
+  
+  order: any = null;
   paymentIntent: any = null;
   isLoading = false;
   message = '';
   paymentStatus = '';
   isStripeInitialized = false;
+  cart: any = null;
 
   constructor(
+    private orderService: OrderService,
     private paymentService: PaymentService,
-    private stripeService: StriceService
+    private stripeService: StriceService,
+    private cartService: CartService,
+    private router: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
     await this.initializeStripe();
-  }
-
-  ngOnDestroy(): void {
-    // Cleanup
+    this.loadCart();
   }
 
   async initializeStripe(): Promise<void> {
     try {
       await this.stripeService.initializeStripe();
       this.isStripeInitialized = true;
-      console.log('Stripe initialized successfully');
     } catch (error) {
-      console.error('Failed to initialize Stripe:', error);
       this.message = 'Greška pri inicijalizaciji Stripe-a';
     }
   }
 
-  async createPaymentIntent(): Promise<void> {
-    if (!this.orderId) {
-      this.message = 'Unesite Order ID';
+  loadCart(): void {
+    this.cartService.getCart().subscribe({
+      next: (cart) => {
+        this.cart = cart;
+      },
+      error: (error) => {
+        this.message = 'Greška pri učitavanju korpe';
+      }
+    });
+  }
+
+  createOrder(): void {
+    if (!this.isFormValid()) {
+      this.message = 'Molimo popunite sva polja!';
       return;
     }
 
-    if (!this.isStripeInitialized) {
-      this.message = 'Stripe nije inicijalizovan. Pokušavam ponovo...';
-      await this.initializeStripe();
-      if (!this.isStripeInitialized) {
-        this.message = 'Ne mogu da inicijalizujem Stripe';
-        return;
-      }
+    this.isLoading = true;
+    const sessionId = this.cartService.getSessionId();
+
+    if (!sessionId) {
+      this.message = 'Greška: Session ID nije pronađen';
+      this.isLoading = false;
+      return;
     }
 
-    this.isLoading = true;
-    this.message = '';
+    this.orderService.placeOrderFromCart(sessionId, this.guestOrder).subscribe({
+      next: (order) => {
+        this.order = order;
+        this.message = `Porudžbina kreirana! ID: ${order.id}`;
+        this.isLoading = false;
+        this.createPaymentIntent(order.id);
+      },
+      error: (error) => {
+        this.message = `Greška pri kreiranju porudžbine: ${error.error?.message || error.message}`;
+        this.isLoading = false;
+      }
+    });
+  }
 
-    this.paymentService.createPaymentIntent(this.orderId).subscribe({
+  createPaymentIntent(orderId: number): void {
+    this.isLoading = true;
+    this.paymentService.createPaymentIntent(orderId).subscribe({
       next: (response) => {
         this.paymentIntent = response;
-        this.message = `Payment intent kreiran! ID: ${response.paymentIntentId}`;
+        this.message = `Payment intent kreiran!`;
         this.isLoading = false;
         
-        // Mount card element nakon što se dobije payment intent
         setTimeout(() => {
           this.mountCardElement();
         }, 100);
       },
       error: (error) => {
-        this.message = `Greška pri kreiranju payment intenta: ${error.error?.message || error.message || error}`;
+        this.message = `Greška pri kreiranju payment intenta: ${error.error?.message || error.message}`;
         this.isLoading = false;
       }
     });
@@ -83,15 +116,12 @@ export class PaymentComponent implements OnInit, OnDestroy {
   mountCardElement(): void {
     if (this.isStripeInitialized) {
       this.stripeService.mountCardElement('card-element');
-      console.log('Card element mounted');
-    } else {
-      console.error('Stripe not initialized');
     }
   }
 
   async processPayment(): Promise<void> {
     if (!this.paymentIntent) {
-      this.message = 'Prvo kreirajte payment intent';
+      this.message = 'Prvo kreirajte porudžbinu';
       return;
     }
 
@@ -104,15 +134,20 @@ export class PaymentComponent implements OnInit, OnDestroy {
       if (result.status === 'succeeded') {
         this.message = 'Plaćanje uspešno! Potvrđujem na serveru...';
         
-        // Potvrdi na backendu
         this.paymentService.confirmPayment(this.paymentIntent.paymentIntentId).subscribe({
           next: (response) => {
-            this.message = `Plaćanje kompletno uspešno! Status: ${response.status}`;
+            this.message = `Plaćanje kompletno uspešno! Hvala na kupovini.`;
             this.paymentStatus = response.status;
             this.isLoading = false;
+            
+            // Redirekt na success page ili clear cart
+            setTimeout(() => {
+              this.cartService.clearCart().subscribe();
+              this.router.navigate(['/success']);
+            }, 2000);
           },
           error: (error) => {
-            this.message = `Plaćanje uspešno, ali greška pri potvrdi na serveru: ${error.error?.message || error.message || error}`;
+            this.message = `Plaćanje uspešno, ali greška pri potvrdi na serveru`;
             this.isLoading = false;
           }
         });
@@ -126,20 +161,11 @@ export class PaymentComponent implements OnInit, OnDestroy {
     }
   }
 
-  checkPaymentStatus(): void {
-    if (!this.paymentIntent) {
-      this.message = 'Nema payment intenta';
-      return;
-    }
-
-    this.paymentService.getPaymentStatus(this.paymentIntent.paymentIntentId).subscribe({
-      next: (response) => {
-        this.paymentStatus = response.status;
-        this.message = `Trenutni status: ${response.status}`;
-      },
-      error: (error) => {
-        this.message = `Greška pri proveri statusa: ${error.error?.message || error.message || error}`;
-      }
-    });
+  private isFormValid(): boolean {
+    return !!this.guestOrder.email && 
+           !!this.guestOrder.firstName && 
+           !!this.guestOrder.lastName && 
+           !!this.guestOrder.address && 
+           !!this.guestOrder.phone;
   }
 }

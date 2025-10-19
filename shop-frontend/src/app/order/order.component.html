@@ -1,0 +1,34 @@
+<div class="order-container" [formGroup]="orderForm">
+  <h2>Kreiraj Porudžbinu</h2>
+  
+  <div class="form-group">
+    <label>User ID:</label>
+    <input type="number" formControlName="userId" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label>Product ID:</label>
+    <input type="number" formControlName="productId" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label>Količina:</label>
+    <input type="number" formControlName="quantity" class="form-control">
+  </div>
+
+  <button (click)="createOrder()" [disabled]="isLoading" class="btn btn-primary">
+    {{ isLoading ? 'Kreiranje...' : 'Kreiraj Porudžbinu' }}
+  </button>
+
+  <div *ngIf="message" [class]="message.includes('Greška') ? 'error-message' : 'success-message'">
+    {{ message }}
+  </div>
+
+  <div *ngIf="order" class="order-details">
+    <h3>Detalji Porudžbine</h3>
+    <p><strong>Broj porudžbine:</strong> {{ order.orderNumber }}</p>
+    <p><strong>Status:</strong> {{ order.status }}</p>
+    <p><strong>Ukupan iznos:</strong> ${{ order.totalAmount }}</p>
+    <p><strong>Status plaćanja:</strong> {{ order.payment.status }}</p>
+  </div>
+</div>

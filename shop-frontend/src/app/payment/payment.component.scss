@@ -1,0 +1,21 @@
+.card-element {
+  border: 1px solid #e1e5e9;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+  background: white;
+  min-height: 50px;
+  transition: border-color 0.15s ease;
+}
+
+.card-element:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.debug-info {
+  color: #6c757d;
+  font-size: 12px;
+  margin-top: 10px;
+}

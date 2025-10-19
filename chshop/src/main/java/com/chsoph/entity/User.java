@@ -27,12 +27,4 @@ public class User {
     private LocalDateTime createdDate;
 
     private LocalDateTime updatedDate;
-
-    @OneToMany(mappedBy = "user")
-    @JsonManagedReference
-    private List<Orders> orders;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private Cart cart;
 }

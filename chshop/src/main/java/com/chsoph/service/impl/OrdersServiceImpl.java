@@ -1,5 +1,7 @@
 package com.chsoph.service.impl;
 
+import com.chsoph.dto.CartResponse;
+import com.chsoph.dto.GuestOrderRequest;
 import com.chsoph.dto.OrderRequest;
 import com.chsoph.entity.*;
 import com.chsoph.exepction.ResourceNotFoundException;
@@ -7,6 +9,7 @@ import com.chsoph.repository.*;
 import com.chsoph.service.OrderService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -17,6 +20,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class OrdersServiceImpl implements OrderService {
 
     private final OrdersRepository ordersRepository;
@@ -24,52 +28,60 @@ public class OrdersServiceImpl implements OrderService {
     private final ProductRepository productRepository;
     private final OrderItemRepository orderItemRepository;
     private final PaymentRepository paymentRepository;
+    private final CartServiceImpl cartService;
 
     @Override
     @Transactional
-    public Orders placeOrder(Long userId, OrderRequest orderRequest) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+    public Orders placeOrderFromCart(String sessionId, GuestOrderRequest guestOrderRequest) {
+        CartResponse cart = cartService.getCart(sessionId);
 
+        if (cart.getItems().isEmpty()) {
+            throw new IllegalStateException("Korpa je prazna");
+        }
+
+        // Kreiraj order sa guest podacima
         Orders orders = Orders.builder()
-                .user(user)
                 .orderNumber(UUID.randomUUID().toString())
-                .status("PENDING_PAYMENT") // Novi status
+                .status("PENDING_PAYMENT")
                 .createdDate(LocalDateTime.now())
+                .guestEmail(guestOrderRequest.getEmail())
+                .guestFirstName(guestOrderRequest.getFirstName())
+                .guestLastName(guestOrderRequest.getLastName())
+                .guestAddress(guestOrderRequest.getAddress())
+                .guestPhone(guestOrderRequest.getPhone())
                 .build();
 
         orders = ordersRepository.save(orders);
-        final Orders savedOrders = orders;
+        final Orders finalOrders = orders;
 
-        List<OrderItem> orderItems = orderRequest.getItems().stream()
-                .map(itemRequest -> {
-                    Product product = productRepository.findById(itemRequest.getProductId())
-                            .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+        List<OrderItem> orderItems = cart.getItems().stream()
+                .map(cartItem -> {
+                    Product product = productRepository.findById(cartItem.getProductId())
+                            .orElseThrow(() -> new ResourceNotFoundException("Proizvod nije pronađen"));
 
                     return OrderItem.builder()
-                            .order(savedOrders)
+                            .order(finalOrders)
                             .product(product)
-                            .quantity(itemRequest.getQuantity())
-                            .price(product.getPrice().multiply(BigDecimal.valueOf(itemRequest.getQuantity())))
+                            .quantity(cartItem.getQuantity())
+                            .price(cartItem.getTotalPrice())
                             .build();
                 })
                 .collect(Collectors.toList());
 
         orderItemRepository.saveAll(orderItems);
 
-        BigDecimal totalAmount = orderItems.stream()
-                .map(OrderItem::getPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-        orders.setTotalAmount(totalAmount);
+        orders.setTotalAmount(cart.getTotalPrice());
         orders.setOrderItems(orderItems);
         orders = ordersRepository.save(orders);
 
-        // Kreiraj payment sa Stripe podacima
+        // Očisti korpu nakon kreiranja porudžbine
+        cartService.clearCart(sessionId);
+
+        // Kreiraj payment
         Payment payment = Payment.builder()
                 .order(orders)
-                .amount(totalAmount)
-                .method("CARD") // Podrazumevana metoda
+                .amount(cart.getTotalPrice())
+                .method("CARD")
                 .status("PENDING")
                 .createdDate(LocalDateTime.now())
                 .build();
@@ -77,6 +89,7 @@ public class OrdersServiceImpl implements OrderService {
         paymentRepository.save(payment);
         orders.setPayment(payment);
 
+        log.info("Kreirana guest porudžbina, session: {}, order ID: {}", sessionId, orders.getId());
         return ordersRepository.save(orders);
     }
 

@@ -1,5 +1,6 @@
 package com.chsoph.controller;
 
+import com.chsoph.dto.GuestOrderRequest;
 import com.chsoph.dto.OrderRequest;
 import com.chsoph.entity.Orders;
 import com.chsoph.service.OrderService;
@@ -12,16 +13,17 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/orders")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class OrderController {
 
     private final OrderService orderService;
 
-    @PostMapping
-    public ResponseEntity<Orders> placeOrder(
-        @RequestParam Long userId,
-        @RequestBody OrderRequest orderRequest) {
+    @PostMapping()
+    public ResponseEntity<Orders> placeOrderFromCart(
+            @RequestParam String sessionId,
+            @RequestBody GuestOrderRequest guestOrderRequest) {
 
-        Orders newOrders = orderService.placeOrder(userId, orderRequest);
+        Orders newOrders = orderService.placeOrderFromCart(sessionId, guestOrderRequest);
         return ResponseEntity.ok(newOrders);
     }
 

@@ -31,10 +31,11 @@ public class Orders {
 
     private LocalDateTime createdDate;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonBackReference
-    private User user;
+    private String guestEmail;
+    private String guestFirstName;
+    private String guestLastName;
+    private String guestAddress;
+    private String guestPhone;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     @JsonManagedReference

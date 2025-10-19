@@ -53,7 +53,7 @@ public class StripePaymentServiceImpl {
 
             Map<String, Object> params = new HashMap<>();
             params.put("amount", amountInCents);
-            params.put("currency", "usd");
+            params.put("currency", "chf");
             params.put("payment_method_types", List.of("card"));
             params.put("metadata", Map.of(
                     "order_id", orderId.toString(),
@@ -69,7 +69,7 @@ public class StripePaymentServiceImpl {
             Payment payment = existingPayment.orElseGet(() -> Payment.builder()
                     .order(order)
                     .amount(order.getTotalAmount())
-                    .currency("usd")
+                    .currency("chf")
                     .status("PENDING")
                     .method("CARD")
                     .build());
@@ -87,7 +87,7 @@ public class StripePaymentServiceImpl {
                     .paymentIntentId(paymentIntent.getId())
                     .status(paymentIntent.getStatus())
                     .amount(order.getTotalAmount())
-                    .currency("usd")
+                    .currency("chf")
                     .build();
 
         } catch (StripeException e) {

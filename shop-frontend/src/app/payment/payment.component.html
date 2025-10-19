@@ -1,0 +1,47 @@
+<div class="payment-container">
+  <h2>Stripe Plaćanje</h2>
+
+  <div class="form-group">
+    <label>Order ID:</label>
+    <input type="number" [(ngModel)]="orderId" class="form-control" placeholder="Unesite ID porudžbine">
+  </div>
+
+  <button (click)="createPaymentIntent()" [disabled]="isLoading" class="btn btn-primary">
+    {{ isLoading ? 'Kreiranje...' : 'Kreiraj Payment Intent' }}
+  </button>
+
+  <div *ngIf="paymentIntent" class="payment-section">
+    <h3>Podaci za plaćanje</h3>
+    <p><strong>Iznos:</strong> ${{ paymentIntent.amount }}</p>
+    <p><strong>Valuta:</strong> {{ paymentIntent.currency }}</p>
+    
+    <div class="card-section">
+      <label>Podaci kartice:</label>
+      <div id="card-element" class="card-element">
+        <!-- Stripe će ovde dodati svoje elemente -->
+      </div>
+      <small class="text-muted">Unesite podatke test kartice: 4242424242424242</small>
+    </div>
+
+    <button (click)="processPayment()" [disabled]="isLoading" class="btn btn-success">
+      {{ isLoading ? 'Obrađujem...' : 'Plati' }}
+    </button>
+
+    <button (click)="checkPaymentStatus()" class="btn btn-info">
+      Proveri Status
+    </button>
+  </div>
+
+  <div *ngIf="message" [class]="message.includes('Greška') ? 'error-message' : 'success-message'">
+    {{ message }}
+  </div>
+
+  <div *ngIf="paymentStatus" class="status-info">
+    <h4>Status Plaćanja: {{ paymentStatus }}</h4>
+  </div>
+
+  <!-- Debug info -->
+  <div *ngIf="!isStripeInitialized" class="debug-info">
+    <small>Stripe se inicijalizuje...</small>
+  </div>
+</div>

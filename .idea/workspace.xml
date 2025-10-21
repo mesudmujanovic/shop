@@ -5,42 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e7cce52-5410-4f16-8319-9623de5860ff" name="Changes" comment="&quot;Work space&quot;">
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/cart/cart.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/cart/cart.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/cart/cart.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/cart/cart.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/navigation/navigation.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/navigation/navigation.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/navigation/navigation.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/navigation/navigation.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/product-list/product-list.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/product-list/product-list.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/product-list/product-list.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/product-list/product-list.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/service/cart.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/service/cart.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/service/order.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/service/order.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/service/payment.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/service/payment.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/service/product.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/service/product.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/service/strice.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shop-frontend/src/app/service/strice.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/CartController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/CategoryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop-frontend/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shop-frontend/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shop-frontend/src/app/app.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/order/order.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shop-frontend/src/app/order/order.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/payment.service.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/payment.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/payment/payment.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop-frontend/src/app/payment/payment.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/payment/payment.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shop-frontend/src/app/payment/payment.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/strice.service.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/strice.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop-frontend/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/shop-frontend/src/styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/PaymentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/dto/CartItemResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/dto/CartItemResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/entity/Orders.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/entity/Orders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/CategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/OrdersServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/OrdersServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/ProductServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +59,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/shop-frontend" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -148,6 +126,8 @@
       <workItem from="1760210973610" duration="28000" />
       <workItem from="1760211793037" duration="194000" />
       <workItem from="1760212067288" duration="985000" />
+      <workItem from="1761050902024" duration="129000" />
+      <workItem from="1761051059694" duration="1962000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;Work space&quot;">
       <created>1760890729059</created>
@@ -163,7 +143,14 @@
       <option name="project" value="LOCAL" />
       <updated>1760890830219</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="&quot;Work space&quot;">
+      <created>1760892602424</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1760892602424</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

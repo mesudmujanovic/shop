@@ -2,8 +2,6 @@ package com.chsoph.controller;
 
 import com.chsoph.dto.CartItemRequest;
 import com.chsoph.dto.CartResponse;
-import com.chsoph.entity.Cart;
-import com.chsoph.service.CartService;
 import com.chsoph.service.impl.CartServiceImpl;
 import com.chsoph.service.impl.SessionService;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.Map;
 
 @RestController

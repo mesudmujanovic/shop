@@ -6,7 +6,6 @@ import com.chsoph.repository.CategoryRepository;
 import com.chsoph.repository.ProductRepository;
 import com.chsoph.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

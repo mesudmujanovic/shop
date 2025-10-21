@@ -1,38 +1,59 @@
-<!-- product-list.component.html -->
-<div class="product-list-container">
-  <h2>Proizvodi</h2>
-
-  <div *ngIf="isLoading" class="loading">Učitavanje proizvoda...</div>
-
-  <div *ngIf="message" [class]="message.includes('Greška') ? 'error-message' : 'success-message'">
-    {{ message }}
+<div class="products-page">
+  <div class="sidebar">
+    <app-category-sidebar 
+      (categorySelected)="onCategorySelected($event)">
+    </app-category-sidebar>
   </div>
 
-  <div class="products-grid">
-    <div *ngFor="let product of products" class="product-card">
-      <div class="product-image">
-        <img [src]="product.imageUrl || 'assets/placeholder-image.jpg'" [alt]="product.name">
+  <div class="products-content">
+    <div class="product-list-container">
+      <h2>
+        Proizvodi 
+        <span *ngIf="selectedCategoryId !== null" class="category-indicator">
+          (Filtrirano po kategoriji)
+        </span>
+        <span *ngIf="selectedCategoryId === null" class="category-indicator">
+          (Svi proizvodi)
+        </span>
+      </h2>
+
+      <div *ngIf="isLoading" class="loading">
+        <span *ngIf="selectedCategoryId === null">Učitavanje svih proizvoda...</span>
+        <span *ngIf="selectedCategoryId !== null">Učitavanje proizvoda za kategoriju...</span>
       </div>
-      
-      <div class="product-info">
-        <h3>{{ product.name }}</h3>
-        <p class="product-description">{{ product.description }}</p>
-        <p class="product-price">{{ product.price | currency:'CHF' }}</p>
-        <p class="product-stock" [class.low-stock]="product.stock < 5">
-          Na stanju: {{ product.stock }}
-        </p>
-        
-        <button 
-          (click)="addToCart(product)" 
-          [disabled]="product.stock === 0"
-          class="btn btn-primary add-to-cart-btn">
-          {{ product.stock === 0 ? 'Nema na stanju' : 'Dodaj u korpu' }}
-        </button>
+
+      <div *ngIf="message" [class]="message.includes('Greška') ? 'error-message' : 'success-message'">
+        {{ message }}
+      </div>
+
+      <div class="products-grid">
+        <div *ngFor="let product of filteredProducts" class="product-card">
+          <div class="product-image">
+            <img [src]="product.imageUrl || 'assets/placeholder-image.jpg'" [alt]="product.name">
+          </div>
+          
+          <div class="product-info">
+            <h3>{{ product.name }}</h3>
+            <p class="product-description">{{ product.description }}</p>
+            <p class="product-price">{{ product.price | currency:'CHF' }}</p>
+            <p class="product-stock" [class.low-stock]="product.stock < 5">
+              Na stanju: {{ product.stock }}
+            </p>
+            
+            <button 
+              (click)="addToCart(product)" 
+              [disabled]="product.stock === 0"
+              class="btn btn-primary add-to-cart-btn">
+              {{ product.stock === 0 ? 'Nema na stanju' : 'Dodaj u korpu' }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="filteredProducts.length === 0 && !isLoading" class="no-products">
+        <span *ngIf="selectedCategoryId === null">Nema dostupnih proizvoda.</span>
+        <span *ngIf="selectedCategoryId !== null">Nema proizvoda u ovoj kategoriji.</span>
       </div>
     </div>
-  </div>
-
-  <div *ngIf="products.length === 0 && !isLoading" class="no-products">
-    Nema dostupnih proizvoda.
   </div>
 </div>

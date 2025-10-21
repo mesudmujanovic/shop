@@ -1,0 +1,37 @@
+<div class="category-sidebar">
+  <h3>Kategorije</h3>
+  
+  <div class="category-list">
+    <!-- Sve kategorije -->
+    <div 
+      class="category-item main-category" 
+      [class.active]="selectedCategoryId === null"
+      (click)="selectCategory(null)">
+      <span>Svi proizvodi</span>
+    </div>
+
+    <!-- Glavne kategorije -->
+    <div *ngFor="let category of getParentCategories()" class="category-group">
+      <div 
+        class="category-item main-category" 
+        [class.active]="selectedCategoryId === category.id"
+        (click)="selectCategory(category.id)">
+        <span>{{ category.name }}</span>
+        <span *ngIf="getSubcategories(category.id).length > 0" class="toggle-icon">
+          ›
+        </span>
+      </div>
+      
+      <!-- Podkategorije -->
+      <div *ngIf="getSubcategories(category.id).length > 0" class="subcategories">
+        <div 
+          *ngFor="let subcategory of getSubcategories(category.id)"
+          class="category-item subcategory"
+          [class.active]="selectedCategoryId === subcategory.id"
+          (click)="selectCategory(subcategory.id)">
+          {{ subcategory.name }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

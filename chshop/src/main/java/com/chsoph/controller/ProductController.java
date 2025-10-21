@@ -1,8 +1,8 @@
 package com.chsoph.controller;
+
 import com.chsoph.entity.Product;
 import com.chsoph.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

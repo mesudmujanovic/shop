@@ -1,7 +1,6 @@
 package com.chsoph.controller;
 
 import com.chsoph.dto.GuestOrderRequest;
-import com.chsoph.dto.OrderRequest;
 import com.chsoph.entity.Orders;
 import com.chsoph.service.OrderService;
 import lombok.RequiredArgsConstructor;

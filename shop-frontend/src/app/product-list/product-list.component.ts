@@ -21,7 +21,7 @@ export class ProductListComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private categoryService: CategoryService, // DODAJTE OVO
+    private categoryService: CategoryService,
     private cartService: CartService
   ) {}
 
@@ -49,10 +49,8 @@ export class ProductListComponent implements OnInit {
     this.selectedCategoryId = categoryId;
     
     if (categoryId === null) {
-      // Prikaži sve proizvode
       this.filteredProducts = this.products;
     } else {
-      // Koristi CategoryService da dobiješ proizvode za odabranu kategoriju
       this.loadProductsByCategory(categoryId);
     }
   }
@@ -63,7 +61,6 @@ export class ProductListComponent implements OnInit {
       next: (category) => {
         this.filteredProducts = category.products || [];
         this.isLoading = false;
-        console.log('Proizvodi za kategoriju:', this.filteredProducts);
       },
       error: (error) => {
         this.message = 'Greška pri učitavanju proizvoda za kategoriju';
@@ -73,15 +70,42 @@ export class ProductListComponent implements OnInit {
     });
   }
 
+  filterProducts(): void {
+    if (this.selectedCategoryId === null) {
+      this.filteredProducts = this.products;
+    } else {
+      this.filteredProducts = this.products.filter(
+        product => product.category?.id === this.selectedCategoryId
+      );
+    }
+  }
+
   addToCart(product: Product): void {
+    // Add loading state to button
+    const button = event?.target as HTMLButtonElement;
+    if (button) {
+      button.classList.add('loading');
+    }
+
     this.cartService.addToCart(product.id, 1).subscribe({
       next: (cart) => {
-        this.message = `Dodat ${product.name} u korpu!`;
+        this.message = `🎉 Dodat ${product.name} u korpu!`;
         this.cartService.refreshCartCount();
+        
+        // Remove loading state
+        if (button) {
+          button.classList.remove('loading');
+        }
+        
         setTimeout(() => this.message = '', 3000);
       },
       error: (error) => {
-        this.message = `Greška pri dodavanju u korpu: ${error.error?.message || error.message}`;
+        this.message = `❌ Greška pri dodavanju u korpu: ${error.error?.message || error.message}`;
+        
+        // Remove loading state
+        if (button) {
+          button.classList.remove('loading');
+        }
       }
     });
   }

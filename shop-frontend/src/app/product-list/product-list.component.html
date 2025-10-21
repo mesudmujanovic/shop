@@ -1,59 +1,160 @@
 <div class="products-page">
+  <!-- Sidebar -->
   <div class="sidebar">
     <app-category-sidebar 
       (categorySelected)="onCategorySelected($event)">
     </app-category-sidebar>
   </div>
 
+  <!-- Main Content -->
   <div class="products-content">
-    <div class="product-list-container">
-      <h2>
-        Proizvodi 
-        <span *ngIf="selectedCategoryId !== null" class="category-indicator">
-          (Filtrirano po kategoriji)
-        </span>
-        <span *ngIf="selectedCategoryId === null" class="category-indicator">
-          (Svi proizvodi)
-        </span>
-      </h2>
-
-      <div *ngIf="isLoading" class="loading">
-        <span *ngIf="selectedCategoryId === null">Učitavanje svih proizvoda...</span>
-        <span *ngIf="selectedCategoryId !== null">Učitavanje proizvoda za kategoriju...</span>
-      </div>
-
-      <div *ngIf="message" [class]="message.includes('Greška') ? 'error-message' : 'success-message'">
-        {{ message }}
-      </div>
-
-      <div class="products-grid">
-        <div *ngFor="let product of filteredProducts" class="product-card">
-          <div class="product-image">
-            <img [src]="product.imageUrl || 'assets/placeholder-image.jpg'" [alt]="product.name">
+    <div class="products-header">
+      <div class="header-content">
+        <h1 class="page-title">
+          <i class="fas fa-shopping-bag me-3"></i>
+          Proizvodi
+          <span class="category-indicator" *ngIf="selectedCategoryId !== null">
+            <i class="fas fa-filter me-2"></i>
+            Filtrirano po kategoriji
+          </span>
+          <span class="category-indicator" *ngIf="selectedCategoryId === null">
+            <i class="fas fa-grid me-2"></i>
+            Svi proizvodi
+          </span>
+        </h1>
+        
+        <div class="products-stats">
+          <div class="stat-badge">
+            <i class="fas fa-cube"></i>
+            <span class="stat-number">{{ filteredProducts.length }}</span>
+            <span class="stat-label">Proizvoda</span>
           </div>
-          
-          <div class="product-info">
-            <h3>{{ product.name }}</h3>
-            <p class="product-description">{{ product.description }}</p>
-            <p class="product-price">{{ product.price | currency:'CHF' }}</p>
-            <p class="product-stock" [class.low-stock]="product.stock < 5">
-              Na stanju: {{ product.stock }}
-            </p>
-            
-            <button 
-              (click)="addToCart(product)" 
-              [disabled]="product.stock === 0"
-              class="btn btn-primary add-to-cart-btn">
-              {{ product.stock === 0 ? 'Nema na stanju' : 'Dodaj u korpu' }}
-            </button>
+          <div class="stat-badge" *ngIf="selectedCategoryId">
+            <i class="fas fa-filter"></i>
+            <span class="stat-number">1</span>
+            <span class="stat-label">Filter</span>
           </div>
         </div>
       </div>
+    </div>
 
-      <div *ngIf="filteredProducts.length === 0 && !isLoading" class="no-products">
-        <span *ngIf="selectedCategoryId === null">Nema dostupnih proizvoda.</span>
-        <span *ngIf="selectedCategoryId !== null">Nema proizvoda u ovoj kategoriji.</span>
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="loading-spinner">
+        <i class="fas fa-spinner fa-spin"></i>
       </div>
+      <div class="loading-text">
+        <span *ngIf="selectedCategoryId === null">Učitavam sve proizvode...</span>
+        <span *ngIf="selectedCategoryId !== null">Učitavam proizvode za kategoriju...</span>
+      </div>
+    </div>
+
+    <!-- Messages -->
+    <div *ngIf="message" 
+         [class]="message.includes('Greška') ? 'message-error' : 'message-success'">
+      <i [class]="message.includes('Greška') ? 'fas fa-exclamation-triangle' : 'fas fa-check-circle'"></i>
+      {{ message }}
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-grid" *ngIf="!isLoading">
+      <div *ngFor="let product of filteredProducts; let i = index" 
+           class="product-card"
+           [style.animation-delay]="i * 0.1 + 's'">
+        
+        <!-- Product Image -->
+        <div class="product-image">
+          <div class="image-container">
+            <img [src]="product.imageUrl || 'assets/placeholder-image.jpg'" 
+                 [alt]="product.name"
+                 class="product-img">
+            <div class="image-overlay">
+              <button class="quick-view-btn">
+                <i class="fas fa-eye"></i>
+              </button>
+              <button class="wishlist-btn">
+                <i class="far fa-heart"></i>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Stock Badge -->
+          <div class="stock-badge" [class.low-stock]="product.stock < 5">
+            <i class="fas fa-box"></i>
+            {{ product.stock }} na stanju
+          </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="product-info">
+          <!-- Category -->
+          <div class="product-category" *ngIf="product.category">
+            <i class="fas fa-tag"></i>
+            {{ product.category.name }}
+          </div>
+
+          <!-- Title -->
+          <h3 class="product-title">{{ product.name }}</h3>
+
+          <!-- Description -->
+          <p class="product-description">{{ product.description }}</p>
+
+          <!-- Specifications -->
+          <div class="product-specs" *ngIf="product.specifications">
+            <i class="fas fa-list-ul"></i>
+            {{ product.specifications | slice:0:60 }}...
+          </div>
+
+          <!-- Price & Actions -->
+          <div class="product-footer">
+            <div class="price-section">
+              <div class="product-price">
+                <i class="fas fa-tag"></i>
+                {{ product.price | currency:'CHF' }}
+              </div>
+              <div class="price-label">Cena</div>
+            </div>
+
+            <button 
+              (click)="addToCart(product)" 
+              [disabled]="product.stock === 0"
+              class="add-to-cart-btn"
+              [class.disabled]="product.stock === 0">
+              
+              <span class="btn-content">
+                <i class="fas fa-shopping-cart"></i>
+                {{ product.stock === 0 ? 'Nema na stanju' : 'Dodaj u korpu' }}
+              </span>
+              
+              <span class="btn-loader">
+                <i class="fas fa-spinner fa-spin"></i>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Hover Effects -->
+        <div class="product-hover"></div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="filteredProducts.length === 0 && !isLoading" class="empty-state">
+      <div class="empty-icon">
+        <i class="fas fa-shopping-bag"></i>
+      </div>
+      <h3 class="empty-title">
+        <span *ngIf="selectedCategoryId === null">Nema dostupnih proizvoda</span>
+        <span *ngIf="selectedCategoryId !== null">Nema proizvoda u ovoj kategoriji</span>
+      </h3>
+      <p class="empty-description">
+        <span *ngIf="selectedCategoryId === null">Proverite ponovo kasnije.</span>
+        <span *ngIf="selectedCategoryId !== null">Pokušajte drugu kategoriju.</span>
+      </p>
+      <button class="empty-action-btn" (click)="selectedCategoryId = null; filterProducts()">
+        <i class="fas fa-grid"></i>
+        Pregledaj sve proizvode
+      </button>
     </div>
   </div>
 </div>

@@ -18,6 +18,18 @@ export class ProductListComponent implements OnInit {
   isLoading = false;
   message = '';
   selectedCategoryId: number | null = null;
+ isSidebarOpen: any;
+
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+    document.body.style.overflow = this.isSidebarOpen ? 'hidden' : '';
+  }
+
+  closeSidebar() {
+    this.isSidebarOpen = false;
+    document.body.style.overflow = '';
+  }
+
 
   constructor(
     private productService: ProductService,
@@ -27,6 +39,7 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProducts();
+    this.isSidebarOpen = false;
   }
 
   loadProducts(): void {
@@ -52,6 +65,9 @@ export class ProductListComponent implements OnInit {
       this.filteredProducts = this.products;
     } else {
       this.loadProductsByCategory(categoryId);
+    }
+      if (window.innerWidth < 993) {
+      this.closeSidebar();
     }
   }
 

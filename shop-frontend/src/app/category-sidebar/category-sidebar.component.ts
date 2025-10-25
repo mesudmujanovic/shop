@@ -18,6 +18,7 @@ export class CategorySidebarComponent implements OnInit {
   totalProducts: number = 0;
 
   @Output() categorySelected = new EventEmitter<number | null>();
+  @Output() closeSidebar = new EventEmitter<void>(); 
 
   constructor(private categoryService: CategoryService) { }
 
@@ -90,6 +91,9 @@ export class CategorySidebarComponent implements OnInit {
   selectCategory(categoryId: number | null): void {
     this.selectedCategoryId = categoryId;
     this.categorySelected.emit(categoryId);
+        if (window.innerWidth < 992) {
+      this.closeSidebar.emit();
+    }
   }
 
   getCategoryProductCount(categoryId: number): number {

@@ -6,19 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5e7cce52-5410-4f16-8319-9623de5860ff" name="Changes" comment="&quot;Work space&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/CartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/CategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/PaymentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/dto/CartItemResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/dto/CartItemResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/entity/Orders.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/entity/Orders.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/CategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/CategoryServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/OrdersServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/OrdersServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/product-list/product-list.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/shop-frontend/src/app/product-list/product-list.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/product-list/product-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shop-frontend/src/app/product-list/product-list.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +116,8 @@
       <workItem from="1760211793037" duration="194000" />
       <workItem from="1760212067288" duration="985000" />
       <workItem from="1761050902024" duration="129000" />
-      <workItem from="1761051059694" duration="1962000" />
+      <workItem from="1761051059694" duration="2787000" />
+      <workItem from="1761404725639" duration="1264000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;Work space&quot;">
       <created>1760890729059</created>

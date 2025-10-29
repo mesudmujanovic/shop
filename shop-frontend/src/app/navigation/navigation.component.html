@@ -1,19 +1,40 @@
-
-
-<!-- Navbar (pretpostavimo da već imaš) -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container‑fluid">
-    <a class="navbar-brand" href="#">Moja Firma</a>
+<nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <i class="fas fa-rocket brand-icon"></i>
+      Moja Firma
+    </a>
+    
     <button class="navbar-toggler" type="button" 
             data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
+    
     <div class="collapse navbar-collapse" id="navbarNav">
-   <a routerLink="/products" routerLinkActive="active">Proizvodi</a>
-    <a routerLink="/cart" routerLinkActive="active">
-      Korpa
-      <span class="cart-badge" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
-    </a>>
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" routerLink="/products" routerLinkActive="active">
+          <i class="fas fa-box nav-icon"></i>
+          Proizvodi
+          <span class="link-underline"></span>
+        </a>
+        
+        <a class="nav-link cart-link" routerLink="/cart" routerLinkActive="active">
+          <i class="fas fa-shopping-cart nav-icon"></i>
+          Korpa
+          <span class="cart-badge" *ngIf="cartItemCount > 0">
+            {{ cartItemCount }}
+            <span class="pulse-effect"></span>
+          </span>
+          <span class="link-underline"></span>
+        </a>
+      </div>
     </div>
+  </div>
+  
+  <!-- Animated background elements -->
+  <div class="nav-background">
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+    <div class="bg-shape shape3"></div>
   </div>
 </nav>

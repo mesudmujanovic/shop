@@ -93,4 +93,8 @@ export class CartComponent implements OnInit {
   getTotalPrice(): number {
     return this.cart?.totalPrice || 0;
   }
+
+getFinalPrice(): number {
+  return this.getTotalPrice();
+}
 }

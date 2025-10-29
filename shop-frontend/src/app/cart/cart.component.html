@@ -1,68 +1,122 @@
 <!-- cart.component.html -->
 <div class="cart-container">
-  <h2>Korpa</h2>
+  <div class="cart-header">
+    <h2 class="cart-title">
+      <i class="fas fa-shopping-cart title-icon"></i>
+      Moja Korpa
+    </h2>
+    <div class="cart-stats">
+      <span class="items-count">{{ getTotalItems() }} proizvoda</span>
+    </div>
+  </div>
 
-  <div *ngIf="isLoading" class="loading">Učitavanje korpe...</div>
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="loading-spinner"></div>
+    <p>Učitavanje korpe...</p>
+  </div>
 
   <div *ngIf="message" [class]="message.includes('Greška') ? 'error-message' : 'success-message'">
+    <i class="fas" [class.fa-exclamation-circle]="message.includes('Greška')" [class.fa-check-circle]="!message.includes('Greška')"></i>
     {{ message }}
   </div>
 
   <div *ngIf="cart && cart.items.length > 0; else emptyCart" class="cart-content">
     <div class="cart-items">
-      <div *ngFor="let item of cart.items" class="cart-item">
-        <div class="item-info">
-          <h4>{{ item.productName }}</h4>
-          <p class="item-price">{{ item.productPrice | currency:'CHF' }}</p>
+      <div *ngFor="let item of cart.items; let i = index" class="cart-item" [style.animation-delay]="i * 0.1 + 's'">
+        <div class="item-image">
+          <div class="image-placeholder">
+            <i class="fas fa-box-open"></i>
+          </div>
         </div>
         
-        <div class="item-controls">
-          <div class="quantity-controls">
-            <button (click)="updateQuantity(item, item.quantity - 1)" class="btn btn-sm">-</button>
-            <span class="quantity">{{ item.quantity }}</span>
-            <button (click)="updateQuantity(item, item.quantity + 1)" class="btn btn-sm">+</button>
-          </div>
+        <div class="item-info">
+          <h4 class="product-name">{{ item.productName }}</h4>
+          <p class="product-price">{{ item.productPrice | currency:'CHF' }}</p>
           
-          <div class="item-total">
-            {{ item.totalPrice | currency:'CHF' }}
+          <div class="item-controls">
+            <div class="quantity-controls">
+              <button (click)="updateQuantity(item, item.quantity - 1)" class="qty-btn minus">
+                <i class="fas fa-minus"></i>
+              </button>
+              <span class="quantity">{{ item.quantity }}</span>
+              <button (click)="updateQuantity(item, item.quantity + 1)" class="qty-btn plus">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+            
+            <button 
+              (click)="removeFromCart(item.productId)" 
+              class="remove-btn">
+              <i class="fas fa-trash"></i>
+              Ukloni
+            </button>
           </div>
-          
-          <button 
-            (click)="removeFromCart(item.productId)" 
-            class="btn btn-danger btn-sm">
-            Ukloni
-          </button>
         </div>
+        
+        <div class="item-total">
+          {{ item.totalPrice | currency:'CHF' }}
+        </div>
+        
+        <div class="item-glow"></div>
       </div>
     </div>
 
     <div class="cart-summary">
-      <div class="summary-row">
-        <strong>Ukupno proizvoda:</strong>
-        <span>{{ getTotalItems() }}</span>
-      </div>
-      <div class="summary-row total">
-        <strong>Ukupan iznos:</strong>
-        <span>{{ getTotalPrice() | currency:'CHF' }}</span>
-      </div>
-      
-      <div class="cart-actions">
-        <button (click)="clearCart()" class="btn btn-warning">
-          Isprazni Korpu
-        </button>
-        <button routerLink="/checkout" class="btn btn-success">
-          Nastavi na Plaćanje
-        </button>
+      <div class="summary-card">
+        <h3 class="summary-title">Sažetak narudžbe</h3>
+        
+        <div class="summary-row">
+          <span>Ukupno proizvoda:</span>
+          <span>{{ getTotalItems() }}</span>
+        </div>
+        
+        <div class="summary-row">
+          <span>Međusuma:</span>
+          <span>{{ getTotalPrice() | currency:'CHF' }}</span>
+        </div>
+    
+        <div class="summary-row total">
+          <strong>Ukupan iznos:</strong>
+          <strong class="total-price">{{ getFinalPrice() | currency:'CHF' }}</strong>
+        </div>
+        
+        <div class="cart-actions">
+          <button (click)="clearCart()" class="btn btn-clear">
+            <i class="fas fa-broom"></i>
+            Isprazni Korpu
+          </button>
+          <button routerLink="/checkout" class="btn btn-checkout">
+            <i class="fas fa-lock"></i>
+            Nastavi na Plaćanje
+          </button>
+        </div>
+        
+        <div class="security-notice">
+          <i class="fas fa-shield-alt"></i>
+          <span>Vaša kupovina je sigurna i zaštićena</span>
+        </div>
       </div>
     </div>
   </div>
 
   <ng-template #emptyCart>
     <div class="empty-cart">
-      <p>Vaša korpa je prazna.</p>
+      <div class="empty-icon">
+        <i class="fas fa-shopping-basket"></i>
+      </div>
+      <h3>Vaša korpa je prazna</h3>
+      <p>Pronađite nešto što će vas osvojiti!</p>
       <button routerLink="/products" class="btn btn-primary">
+        <i class="fas fa-store"></i>
         Pogledaj Proizvode
       </button>
     </div>
   </ng-template>
+  
+  <!-- Animated background elements -->
+  <div class="cart-background">
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+    <div class="bg-shape shape3"></div>
+  </div>
 </div>

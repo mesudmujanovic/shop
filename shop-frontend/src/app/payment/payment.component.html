@@ -2,6 +2,13 @@
 <div class="payment-container">
   <h2>Plaćanje</h2>
 
+  <!-- Progress Indicator -->
+  <div class="payment-progress">
+    <div class="progress-step" [class.active]="!paymentIntent" [class.completed]="paymentIntent">1</div>
+    <div class="progress-step" [class.active]="paymentIntent && !paymentStatus" [class.completed]="paymentStatus">2</div>
+    <div class="progress-step" [class.active]="paymentStatus === 'completed'">3</div>
+  </div>
+
   <div *ngIf="cart && cart.items.length > 0" class="order-summary">
     <h3>Pregled porudžbine</h3>
     <div *ngFor="let item of cart.items" class="order-item">
@@ -18,29 +25,29 @@
     
     <div class="form-group">
       <label>Email *</label>
-      <input type="email" [(ngModel)]="guestOrder.email" class="form-control" placeholder="unesite@email.com">
+      <input type="email" [(ngModel)]="guestOrder.email" class="form-control" placeholder="unesite@email.com" required>
     </div>
 
     <div class="form-row">
       <div class="form-group">
         <label>Ime *</label>
-        <input type="text" [(ngModel)]="guestOrder.firstName" class="form-control" placeholder="Unesite ime">
+        <input type="text" [(ngModel)]="guestOrder.firstName" class="form-control" placeholder="Unesite ime" required>
       </div>
 
       <div class="form-group">
         <label>Prezime *</label>
-        <input type="text" [(ngModel)]="guestOrder.lastName" class="form-control" placeholder="Unesite prezime">
+        <input type="text" [(ngModel)]="guestOrder.lastName" class="form-control" placeholder="Unesite prezime" required>
       </div>
     </div>
 
     <div class="form-group">
       <label>Adresa *</label>
-      <input type="text" [(ngModel)]="guestOrder.address" class="form-control" placeholder="Unesite adresu">
+      <input type="text" [(ngModel)]="guestOrder.address" class="form-control" placeholder="Unesite adresu" required>
     </div>
 
     <div class="form-group">
       <label>Telefon *</label>
-      <input type="tel" [(ngModel)]="guestOrder.phone" class="form-control" placeholder="Unesite telefon">
+      <input type="tel" [(ngModel)]="guestOrder.phone" class="form-control" placeholder="Unesite telefon" required>
     </div>
   </div>
 
@@ -60,6 +67,12 @@
       <small class="text-muted">Test kartica: 4242424242424242</small>
     </div>
 
+    <!-- Security Badges -->
+    <div class="security-badges">
+      <div class="badge">SSL Enkripcija</div>
+      <div class="badge">PCI Kompatibilno</div>
+    </div>
+
     <button 
       (click)="processPayment()" 
       [disabled]="isLoading" 
@@ -74,5 +87,16 @@
 
   <div *ngIf="paymentStatus" class="status-info">
     <h4>Status Plaćanja: {{ paymentStatus }}</h4>
+    <div *ngIf="paymentStatus === 'succeeded'" class="success-animation">
+      <i class="fas fa-check-circle"></i>
+      <p>Plaćanje je uspešno obrađeno!</p>
+    </div>
+  </div>
+
+  <!-- Animated background elements -->
+  <div class="payment-background">
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+    <div class="bg-shape shape3"></div>
   </div>
 </div>

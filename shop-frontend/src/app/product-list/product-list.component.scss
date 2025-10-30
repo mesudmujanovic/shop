@@ -134,8 +134,10 @@
   gap: 1rem;
 
   @include media-breakpoint-down(sm) {
+    justify-content: center;
     flex-direction: column;
     text-align: center;
+    align-items: center;
   }
 }
 
@@ -152,6 +154,10 @@
 
   @include media-breakpoint-down(md) {
     font-size: 1.8rem;
+  }
+
+   @include media-breakpoint-down(sm) {
+    flex-direction: column;
   }
 }
 

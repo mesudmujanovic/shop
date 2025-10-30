@@ -1,5 +1,5 @@
 .custom-navbar {
-  margin: 2rem;
+  margin: 0 2rem 0 2rem;
   background: linear-gradient(135deg, 
     rgba(102, 126, 234, 0.95) 0%, 
     rgba(118, 75, 162, 0.95) 50%, 
@@ -11,7 +11,9 @@
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+
   .navbar-brand {
     font-weight: 700;
     font-size: 1.8rem;
@@ -184,5 +186,17 @@
       justify-content: center;
       margin: 0.5rem 0;
     }
+  }
+}
+
+@media (max-width: 992px) {
+  .custom-navbar {
+    margin: 0 24px 0 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .custom-navbar {
+    margin: 0 1rem 0 1rem;
   }
 }

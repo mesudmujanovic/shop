@@ -2,6 +2,8 @@ package com.chsoph.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -24,6 +26,7 @@ public class Product {
     private int stock;
 
     @Lob
+    @JsonIgnore
     @Column(name = "image_data")
     private byte[] imageData;
 
@@ -38,5 +41,6 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id")
     @JsonBackReference
+    @JsonIgnoreProperties({"imageData", "imageType", "imageBase64"})
     private Category category;
 }

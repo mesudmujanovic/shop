@@ -4,6 +4,7 @@ import { Product, ProductService } from '../service/product.service';
 import { CartService } from '../service/cart.service';
 import { CategorySidebarComponent } from '../category-sidebar/category-sidebar.component';
 import { CategoryService } from '../service/category.service';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-product-list',
@@ -19,6 +20,20 @@ export class ProductListComponent implements OnInit {
   message = '';
   selectedCategoryId: number | null = null;
  isSidebarOpen: any;
+
+   @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const button = document.getElementById('backToTop');
+    if (window.scrollY > 200) {
+      button?.classList.add('show');
+    } else {
+      button?.classList.remove('show');
+    }
+  }
+
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;

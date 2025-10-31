@@ -1,15 +1,5 @@
 <div class="products-page">
   <!-- Sidebar -->
-  <button 
-    class="sidebar-toggle" 
-    *ngIf="!isSidebarOpen"
-    (click)="toggleSidebar()">
-    <i class="fas fa-bars"></i>
-    Prikaži filtere
-  </button>
-
-
-  <!-- Sidebar -->
   <div class="sidebar" [class.sidebar-open]="isSidebarOpen">
     <app-category-sidebar 
       (categorySelected)="onCategorySelected($event)"
@@ -19,36 +9,14 @@
 
   <!-- Main Content -->
   <div class="products-content">
-    <div class="products-header">
-      <div class="header-content">
-        <h1 class="page-title">
-          <i class="fas fa-shopping-bag me-3"></i>
-          Proizvodi
-          <span class="category-indicator" *ngIf="selectedCategoryId !== null">
-            <i class="fas fa-filter me-2"></i>
-            Filtrirano po kategoriji
-          </span>
-          <span class="category-indicator" *ngIf="selectedCategoryId === null">
-            <i class="fas fa-grid me-2"></i>
-            Svi proizvodi
-          </span>
-        </h1>
-        
-        <div class="products-stats">
-          <div class="stat-badge">
-            <i class="fas fa-cube"></i>
-            <span class="stat-number">{{ filteredProducts.length }}</span>
-            <span class="stat-label">Proizvoda</span>
-          </div>
-          <div class="stat-badge" *ngIf="selectedCategoryId">
-            <i class="fas fa-filter"></i>
-            <span class="stat-number">1</span>
-            <span class="stat-label">Filter</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
+ <!-- Sidebar -->
+  <button 
+    class="sidebar-toggle" 
+    *ngIf="!isSidebarOpen"
+    (click)="toggleSidebar()">
+    <i class="fas fa-bars"></i>
+    Prikaži filtere
+  </button>
     <!-- Loading State -->
     <div *ngIf="isLoading" class="loading-state">
       <div class="loading-spinner">
@@ -67,6 +35,9 @@
       {{ message }}
     </div>
 
+    <div class="back-to-top" id="backToTop" (click)="scrollToTop()">
+      <i class="fas fa-arrow-up"></i>
+    </div>
     <!-- Products Grid -->
     <div class="products-grid" *ngIf="!isLoading">
       <div *ngFor="let product of filteredProducts; let i = index" 

@@ -647,3 +647,32 @@
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   }
 }
+
+.back-to-top {
+  position: fixed;
+  right: 2rem;              
+  top: 87%;                
+  transform: translateY(-50%);
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s ease;
+  z-index: 1000;
+}
+
+.back-to-top.show {
+  opacity: 0.6;
+  pointer-events: all;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.back-to-top:hover {
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}

@@ -200,3 +200,10 @@
     margin: 0 1rem 0 1rem;
   }
 }
+
+
+@media (max-width: 388px) {
+  .custom-navbar {
+    padding: 6px;
+  }
+}

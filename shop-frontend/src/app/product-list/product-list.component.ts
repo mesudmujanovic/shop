@@ -21,7 +21,21 @@ export class ProductListComponent implements OnInit {
   selectedCategoryId: number | null = null;
  isSidebarOpen: any;
 
-   @HostListener('window:scroll', [])
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+    document.body.style.overflow = this.isSidebarOpen ? 'hidden' : '';
+  }
+
+  closeSidebar() {
+    this.isSidebarOpen = false;
+    document.body.style.overflow = '';
+  }
+
+  getImageUrl(product: Product) {
+  return product.id ? `http://localhost:8080/api/products/${product.id}/image` : 'assets/placeholder-image.jpg';
+}
+
+    @HostListener('window:scroll', [])
   onWindowScroll() {
     const button = document.getElementById('backToTop');
     if (window.scrollY > 200) {
@@ -34,17 +48,6 @@ export class ProductListComponent implements OnInit {
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-
-  toggleSidebar() {
-    this.isSidebarOpen = !this.isSidebarOpen;
-    document.body.style.overflow = this.isSidebarOpen ? 'hidden' : '';
-  }
-
-  closeSidebar() {
-    this.isSidebarOpen = false;
-    document.body.style.overflow = '';
-  }
-
 
   constructor(
     private productService: ProductService,
@@ -64,6 +67,7 @@ export class ProductListComponent implements OnInit {
         this.products = products;
         this.filteredProducts = products;
         this.isLoading = false;
+        console.log(this.products);
       },
       error: (error) => {
         this.message = 'Greška pri učitavanju proizvoda';

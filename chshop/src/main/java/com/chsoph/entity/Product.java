@@ -23,7 +23,14 @@ public class Product {
 
     private int stock;
 
-    private String imageUrl;
+    @Lob
+    @Column(name = "image_data")
+    private byte[] imageData;
+
+    private String imageType;
+
+    @Transient
+    private String imageBase64;
 
     @Column(length = 2000)
     private String specifications;

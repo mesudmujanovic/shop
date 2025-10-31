@@ -12,6 +12,8 @@ export interface Product {
   imageUrl: string;
   specifications: string;
   category: any;
+    imageBase64?: string;
+  imageType?: string;
 }
 
 @Injectable({

@@ -47,9 +47,8 @@
         <!-- Product Image -->
         <div class="product-image">
           <div class="image-container">
-            <img [src]="product.imageUrl || 'assets/placeholder-image.jpg'" 
-                 [alt]="product.name"
-                 class="product-img">
+     <img [src]="product.imageBase64 ? 'data:' + product.imageType + ';base64,' + product.imageBase64 : 
+     'assets/placeholder-image.jpg'" class="product-img">
             <div class="image-overlay">
               <button class="quick-view-btn">
                 <i class="fas fa-eye"></i>

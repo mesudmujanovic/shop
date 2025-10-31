@@ -8,6 +8,7 @@ import com.chsoph.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -28,7 +29,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAllProducts() {
-        return productRepository.findAll();
+        List<Product> products = productRepository.findAll();
+        products.forEach(p -> {
+            if (p.getImageData() != null) {
+                p.setImageBase64(Base64.getEncoder().encodeToString(p.getImageData()));
+            }
+        });
+        return products;
     }
 
     @Override

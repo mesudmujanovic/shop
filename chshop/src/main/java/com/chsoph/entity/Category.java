@@ -1,6 +1,7 @@
 package com.chsoph.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -22,7 +23,7 @@ public class Category {
     @JsonBackReference
     private Category parent;
 
-    @OneToMany(mappedBy = "category")
-    @JsonManagedReference
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"category", "imageData"})
     private List<Product> products;
 }

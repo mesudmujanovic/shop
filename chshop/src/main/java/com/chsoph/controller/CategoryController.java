@@ -1,5 +1,6 @@
 package com.chsoph.controller;
 
+import com.chsoph.dto.CategoryDTO;
 import com.chsoph.entity.Category;
 import com.chsoph.service.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping
-    public List<Category> getAllCategories() {
+    public List<CategoryDTO> getAllCategories() {
         return categoryService.getAllCategories();
     }
 

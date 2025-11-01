@@ -27,6 +27,7 @@ public class Product {
 
     @Lob
     @JsonIgnore
+    @Basic(fetch = FetchType.LAZY) // Eksplicitno Lazy za LOB
     @Column(name = "image_data")
     private byte[] imageData;
 

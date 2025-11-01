@@ -1,12 +1,15 @@
 package com.chsoph.service.impl;
 
+import com.chsoph.dto.CategoryDTO;
 import com.chsoph.entity.Category;
 import com.chsoph.repository.CategoryRepository;
 import com.chsoph.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -14,8 +17,11 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
 
     @Override
-    public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+    @Transactional(readOnly = true)
+    public List<CategoryDTO> getAllCategories() {
+        return categoryRepository.findAll().stream()
+                .map(CategoryDTO::fromEntity)
+                .collect(Collectors.toList());
     }
 
     @Override

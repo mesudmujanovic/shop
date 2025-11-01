@@ -15,19 +15,20 @@ import java.util.List;
 public class CategoryController {
     private final CategoryService categoryService;
 
-    @GetMapping
-    public List<CategoryDTO> getAllCategories() {
-        return categoryService.getAllCategories();
-    }
-
-    @GetMapping("/{id}")
-    public Category getCategoryById(@PathVariable Long id) {
-        return categoryService.getCategoryById(id);
-    }
-
     @PostMapping
     public Category createCategory(@RequestBody Category category) {
         return categoryService.saveCategory(category);
+    }
+
+    @GetMapping("/{id}")
+    public CategoryDTO getCategoryById(@PathVariable Long id) {
+        return categoryService.getCategoryById(id);
+    }
+
+
+    @GetMapping
+    public List<CategoryDTO> getAllCategories() {
+        return categoryService.getAllCategories();
     }
 
     @DeleteMapping("/{id}")

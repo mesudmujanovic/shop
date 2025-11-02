@@ -4,7 +4,10 @@
 
 .sidebar-toggle {
   display: none;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg,
+    rgba(1, 50, 32, 0.95) 0%, 
+    rgba(5, 80, 50, 0.95) 50%, 
+    rgba(212, 175, 55, 0.3) 100%);
   border: none;
   color: white;
   padding: 1rem 1.5rem;
@@ -98,9 +101,7 @@
 
 // Header
 .products-header {
-  background: linear-gradient(135deg, 
-    rgba(102, 126, 234, 0.95) 0%, 
-    rgba(118, 75, 162, 0.95) 100%);
+  background: white;
   backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 2rem;
@@ -353,7 +354,10 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
+    background: linear-gradient(135deg,
+    rgba(1, 50, 32, 0.95) 0%, 
+    rgba(5, 80, 50, 0.95) 50%, 
+    rgba(212, 175, 55, 0.3) 100%);
     z-index: 2;
   }
 }
@@ -526,7 +530,7 @@
 }
 
 .add-to-cart-btn {
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  // background: linear-gradient(135deg, #667eea, #764ba2);
   border: none;
   color: white;
   padding: 1rem 1.5rem;
@@ -534,7 +538,7 @@
   font-weight: 700;
   font-size: 0.95rem;
   transition: all 0.3s ease;
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  box-shadow: green;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -544,9 +548,12 @@
   justify-content: center;
 
   &:hover:not(.disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
-    background: linear-gradient(135deg, #764ba2, #667eea);
+    transform: translateY(-22px);
+    box-shadow: green;
+  background: linear-gradient(135deg,
+    rgba(1, 50, 32, 0.95) 0%, 
+    rgba(5, 80, 50, 0.95) 50%, 
+    rgba(212, 175, 55, 0.3) 100%);
   }
 
   &:active:not(.disabled) {
@@ -702,7 +709,10 @@
   right: 2rem;              
   top: 87%;                
   transform: translateY(-50%);
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg,
+    rgba(1, 50, 32, 0.95) 0%, 
+    rgba(5, 80, 50, 0.95) 50%, 
+    rgba(212, 175, 55, 0.3) 100%);
   color: white;
   padding: 0.75rem 1.25rem;
   border-radius: 50px;

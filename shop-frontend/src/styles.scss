@@ -2,11 +2,47 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  // box-sizing: border-box;
 }
 
 body {
   font-family: 'Arial', sans-serif;
   line-height: 1.6;
   color: #333;
+}
+
+.custom-navbar, .category-sidebar, .add-to-cart-btn  {
+
+background: linear-gradient(135deg, 
+  rgba(55, 71, 79, 0.95) 0%, 
+  rgba(120, 144, 156, 0.9) 50%, 
+  rgba(176, 190, 197, 0.9) 100%);
+
+
+// background: linear-gradient(135deg, 
+//   rgba(25, 32, 72, 0.95) 0%, 
+//   rgba(63, 81, 181, 0.9) 50%, 
+//   rgba(144, 202, 249, 0.9) 100%);
+
+// background: linear-gradient(135deg, 
+//   rgba(30, 30, 30, 0.95) 0%, 
+//   rgba(55, 55, 55, 0.9) 50%, 
+//   rgba(80, 80, 80, 0.9) 100%);
+
+//   background: linear-gradient(135deg, 
+//     rgba(102, 126, 234, 0.95) 0%, 
+//     rgba(118, 75, 162, 0.95) 50%, 
+//     rgba(255, 138, 0, 0.9) 100%);
+
+
+// background: linear-gradient(135deg,
+//     rgba(0, 70, 140, 0.95) 0%,    /* tamno plava – pouzdanost */
+//     rgba(0, 120, 255, 0.95) 50%,  /* intenzivna plava – energija */
+//     rgba(255, 165, 0, 0.3) 100%); /* narandžasti diskretni naglasak */
+
+
+background: linear-gradient(135deg,
+    rgba(1, 50, 32, 0.95) 0%, 
+    rgba(5, 80, 50, 0.95) 50%, 
+    rgba(212, 175, 55, 0.3) 100%);
 }

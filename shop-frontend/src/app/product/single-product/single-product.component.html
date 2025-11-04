@@ -1,0 +1,48 @@
+<!-- ✅ Poruka (toast) -->
+<div 
+  *ngIf="message"
+  [class]="message.includes('Greška') ? 'message-error' : 'message-success'">
+  <i [class]="message.includes('Greška') ? 'fas fa-exclamation-triangle' : 'fas fa-check-circle'"></i>
+  {{ message }}
+</div>
+
+<!-- ✅ Proizvod -->
+<div class="product-container" *ngIf="product$ | async as product">
+  <div class="image-wrapper">
+    <img 
+      [src]="'data:' + product.imageType + ';base64,' + product.imageBase64" 
+      [alt]="product.name"
+      loading="lazy">
+  </div>
+
+  <div class="details">
+    <h1>{{ product.name }}</h1>
+
+    <div class="price">
+      {{ product.price | currency:'CHF':'symbol':'1.2-2' }}
+    </div>
+
+    <p class="description">{{ product.description }}</p>
+
+    <div class="specs">
+      <strong>Specifikacije:</strong><br>
+      {{ product.specifications }}
+    </div>
+
+    <button 
+      (click)="addToCart(product, $event)" 
+      [disabled]="product.stock === 0"
+      class="add-to-cart-btn"
+      [class.disabled]="product.stock === 0">
+      
+      <span class="btn-content">
+        <i class="fas fa-shopping-cart"></i>
+        {{ product.stock === 0 ? 'Nema na stanju' : 'Dodaj u korpu' }}
+      </span>
+      
+      <span class="btn-loader">
+        <i class="fas fa-spinner fa-spin"></i>
+      </span>
+    </button>
+  </div>
+</div>

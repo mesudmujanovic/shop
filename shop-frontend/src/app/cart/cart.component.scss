@@ -17,7 +17,10 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-      background: linear-gradient(135deg, #667eea, #764ba2);
+     background: linear-gradient(135deg,
+    rgba(1, 50, 32, 0.95) 0%, 
+    rgba(5, 80, 50, 0.95) 50%, 
+    rgba(212, 175, 55, 0.3) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       font-weight: 700;
@@ -31,7 +34,10 @@
     }
     
     .cart-stats {
-      background: rgba(255, 255, 255, 0.9);
+     background: linear-gradient(135deg,
+    rgba(1, 50, 32, 0.95) 0%, 
+    rgba(5, 80, 50, 0.95) 50%, 
+    rgba(212, 175, 55, 0.3) 100%);
       backdrop-filter: blur(10px);
       padding: 0.8rem 1.5rem;
       border-radius: 50px;
@@ -39,7 +45,7 @@
       
       .items-count {
         font-weight: 600;
-        color: #667eea;
+        color: white;
       }
     }
   }
@@ -68,15 +74,17 @@
 }
 
 .cart-item {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
+background: linear-gradient(135deg,
+    rgba(1, 50, 32, 0.95) 0%, 
+    rgba(5, 80, 50, 0.95) 50%, 
+    rgba(212, 175, 55, 0.3) 100%); 
+     backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 1.5rem;
   display: flex;
   gap: 1.5rem;
   align-items: center;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
   position: relative;
   overflow: hidden;
   animation: slideInUp 0.6s ease forwards;
@@ -87,8 +95,10 @@
     .image-placeholder {
       width: 80px;
       height: 80px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      border-radius: 15px;
+background: linear-gradient(135deg,
+    rgba(1, 50, 32, 0.95) 0%, 
+    rgba(5, 80, 50, 0.95) 50%, 
+    rgba(212, 175, 55, 0.3) 100%);      border-radius: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -103,13 +113,13 @@
     .product-name {
       margin: 0 0 0.5rem 0;
       font-weight: 600;
-      color: #2d3748;
+      color: white;
       font-size: 1.2rem;
     }
     
     .product-price {
       margin: 0 0 1rem 0;
-      color: #667eea;
+      color: white;
       font-weight: 600;
       font-size: 1.1rem;
     }
@@ -123,7 +133,10 @@
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        background: rgba(102, 126, 234, 0.1);
+     background: linear-gradient(135deg,
+    rgba(1, 50, 32, 0.95) 0%, 
+    rgba(5, 80, 50, 0.95) 50%, 
+    rgba(212, 175, 55, 0.3) 100%);
         border-radius: 12px;
         padding: 0.3rem;
         
@@ -132,8 +145,8 @@
           height: 32px;
           border: none;
           border-radius: 8px;
-          background: #667eea;
-          color: white;
+     background:  white ;
+          color: rgb(1, 65, 1);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -142,7 +155,6 @@
           
           &:hover {
             transform: scale(1.1);
-            background: #5a6fd8;
           }
           
           &.minus {
@@ -158,7 +170,7 @@
           font-weight: 600;
           min-width: 30px;
           text-align: center;
-          color: #2d3748;
+          color: white;
         }
       }
       
@@ -187,8 +199,8 @@
   .item-total {
     font-size: 1.3rem;
     font-weight: 700;
-    color: #2d3748;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    background: white;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -209,8 +221,10 @@
   top: 2rem;
   
   .summary-card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
+background: linear-gradient(135deg,
+    rgba(1, 50, 32, 0.95) 0%, 
+    rgba(5, 80, 50, 0.95) 50%, 
+    rgba(212, 175, 55, 0.3) 100%);    backdrop-filter: blur(20px);
     border-radius: 20px;
     padding: 2rem;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -220,7 +234,7 @@
       margin: 0 0 1.5rem 0;
       text-align: center;
       font-weight: 600;
-      color: #2d3748;
+      color: white;
       font-size: 1.4rem;
     }
     
@@ -228,21 +242,20 @@
       display: flex;
       justify-content: space-between;
       padding: 0.8rem 0;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      
+      border-bottom: 1px solid white;
+      color: white;
       &.discount {
-        color: #38a169;
+        color:white;
       }
       
       &.total {
         border-bottom: none;
-        border-top: 2px solid #667eea;
         margin-top: 0.5rem;
         padding-top: 1rem;
         font-size: 1.2rem;
         
         .total-price {
-          background: linear-gradient(135deg, #667eea, #764ba2);
+          background: white;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
@@ -270,9 +283,7 @@
         
         &.btn-clear {
           background: rgba(245, 158, 11, 0.1);
-          color: #d97706;
-          border: 1px solid rgba(245, 158, 11, 0.3);
-          
+          color: white;          
           &:hover {
             background: #f59e0b;
             color: white;
@@ -281,9 +292,12 @@
         }
         
         &.btn-checkout {
-          background: linear-gradient(135deg, #667eea, #764ba2);
-          color: white;
-          box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+          background: linear-gradient(135deg,
+          rgba(1, 50, 32, 0.95) 0%, 
+          rgba(5, 80, 50, 0.95) 50%, 
+          rgba(212, 175, 55, 0.3) 100%);
+          color:white;;
+          box-shadow: 0 4px 15px rgba(235, 236, 245, 0.4);
           
           &:hover {
             transform: translateY(-2px);
@@ -298,12 +312,12 @@
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      color: #718096;
+      color: white;
       font-size: 0.9rem;
       margin-top: 1rem;
       
       i {
-        color: #38a169;
+        color: white;
       }
     }
   }
@@ -312,28 +326,40 @@
 .empty-cart {
   text-align: center;
   padding: 4rem 2rem;
-  
+
   .empty-icon {
     font-size: 4rem;
-    color: #cbd5e0;
+    color: linear-gradient(135deg,
+    rgba(1, 50, 32, 0.95) 0%, 
+    rgba(5, 80, 50, 0.95) 50%, 
+    rgba(212, 175, 55, 0.3) 100%);
     margin-bottom: 1.5rem;
     animation: pulse 2s infinite;
   }
   
   h3 {
     font-size: 2rem;
-    color: #2d3748;
+    color:linear-gradient(135deg,
+    rgba(1, 50, 32, 0.95) 0%, 
+    rgba(5, 80, 50, 0.95) 50%, 
+    rgba(212, 175, 55, 0.3) 100%);
     margin-bottom: 1rem;
   }
   
   p {
-    color: #718096;
+    color: linear-gradient(135deg,
+    rgba(1, 50, 32, 0.95) 0%, 
+    rgba(5, 80, 50, 0.95) 50%, 
+    rgba(212, 175, 55, 0.3) 100%);
     margin-bottom: 2rem;
     font-size: 1.1rem;
   }
   
   .btn-primary {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg,
+    rgba(1, 50, 32, 0.95) 0%, 
+    rgba(5, 80, 50, 0.95) 50%, 
+    rgba(212, 175, 55, 0.3) 100%);
     border: none;
     padding: 1rem 2rem;
     border-radius: 12px;
@@ -368,7 +394,7 @@
   }
   
   p {
-    color: #667eea;
+    color: white;
     font-weight: 500;
   }
 }

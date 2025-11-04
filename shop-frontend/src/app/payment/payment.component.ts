@@ -66,10 +66,10 @@ export class PaymentComponent implements OnInit {
   }
 
   createOrder(): void {
-    if (!this.isFormValid()) {
-      this.message = 'Molimo popunite sva polja!';
-      return;
-    }
+    // if (!this.isFormValid()) {
+    //   this.message = 'Molimo popunite sva polja!';
+    //   return;
+    // }
 
     this.isLoading = true;
     const sessionId = this.cartService.getSessionId();

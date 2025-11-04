@@ -40,8 +40,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProductById(Long id) {
-        return productRepository.findById(id)
+        Product product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+         product.setImageBase64(Base64.getEncoder().encodeToString(product.getImageData()));
+       return product;
     }
 
     @Override

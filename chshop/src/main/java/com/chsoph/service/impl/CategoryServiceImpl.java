@@ -31,26 +31,7 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Category not found"));
 
-        CategoryDTO dto = new CategoryDTO();
-        dto.setId(category.getId());
-        dto.setName(category.getName());
-        dto.setDescription(category.getDescription());
-
-        List<ProductDTO> productDTOs = category.getProducts().stream()
-                .map(p -> {
-                    ProductDTO pdto = new ProductDTO();
-                    pdto.setId(p.getId());
-                    pdto.setName(p.getName());
-                    pdto.setDescription(p.getDescription());
-                    pdto.setPrice(p.getPrice());
-                    pdto.setStock(p.getStock());
-                    pdto.setImageType(p.getImageType());
-                    return pdto;
-                })
-                .toList();
-
-        dto.setProducts(productDTOs);
-        return dto;
+        return CategoryDTO.fromEntity(category);
     }
 
     @Override

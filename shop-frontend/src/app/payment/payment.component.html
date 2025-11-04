@@ -16,7 +16,7 @@
       <span>{{ item.totalPrice | currency:'CHF' }}</span>
     </div>
     <div class="order-total">
-      <strong>Ukupno: {{ cart.totalPrice | currency:'CHF' }}</strong>
+      <h3 class="total-color">Ukupno: {{ cart.totalPrice | currency:'CHF' }}</h3>
     </div>
   </div>
 
@@ -89,7 +89,7 @@
     <h4>Status Plaćanja: {{ paymentStatus }}</h4>
     <div *ngIf="paymentStatus === 'succeeded'" class="success-animation">
       <i class="fas fa-check-circle"></i>
-      <p>Plaćanje je uspešno obrađeno!</p>
+      <p class="payment-success">Plaćanje je uspešno obrađeno!</p>
     </div>
   </div>
 

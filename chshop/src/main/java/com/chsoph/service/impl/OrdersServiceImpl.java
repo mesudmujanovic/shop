@@ -87,7 +87,7 @@ public class OrdersServiceImpl implements OrderService {
                 .createdDate(LocalDateTime.now())
                 .build();
 
-        paymentRepository.save(payment);
+        paymentRepository.save(payment); 
         orders.setPayment(payment);
 
         log.info("Kreirana guest porudžbina, session: {}, order ID: {}", sessionId, orders.getId());

@@ -1,40 +1,195 @@
 <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <i class="fas fa-rocket brand-icon"></i>
-      Moja Firma
-    </a>
-    
-    <button class="navbar-toggler" type="button" 
-            data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <!-- Hamburger dugme -->
+    <button class="navbar-toggler hamburger-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
       <span class="navbar-toggler-icon"></span>
     </button>
     
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <div class="navbar-nav ms-auto">
-        <a class="nav-link" routerLink="/products" routerLinkActive="active">
-          <i class="fas fa-box nav-icon"></i>
-          Proizvodi
-          <span class="link-underline"></span>
-        </a>
+    <!-- Logo -->
+    <a class="navbar-brand" href="#">
+      <img src="agestop.jpg" alt="Logo">
+    </a>
+    
+    <!-- Desktop korpa -->
+    <a class="nav-link desktop-cart" routerLink="/cart" routerLinkActive="active">
+      <i class="fas fa-shopping-cart nav-icon"></i>
+      <span class="cart-text">Korpa</span>
+      <span class="cart-badge" *ngIf="cartItemCount > 0">
+        {{ cartItemCount }}
+        <span class="pulse-effect"></span>
+      </span>
+    </a>
+    
+    <!-- Desktop meni -->
+    <div class="collapse navbar-collapse desktop-menu" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active">
+            <i class="fas fa-home nav-icon"></i>
+            Home
+          </a>
+        </li>
         
-        <a class="nav-link cart-link" routerLink="/cart" routerLinkActive="active">
-          <i class="fas fa-shopping-cart nav-icon"></i>
-          Korpa
-          <span class="cart-badge" *ngIf="cartItemCount > 0">
-            {{ cartItemCount }}
-            <span class="pulse-effect"></span>
-          </span>
-          <span class="link-underline"></span>
-        </a>
-      </div>
+        <!-- Shop dropdown sa hover efektom -->
+        <li class="nav-item shop-dropdown"
+              #shopDropdown
+    (mouseenter)="onShopEnter()" 
+    (mouseleave)="onShopLeave()">
+          
+          <a class="nav-link dropdown-toggle" 
+             routerLink="/products" 
+             routerLinkActive="active">
+            <i class="fas fa-shopping-bag nav-icon"></i>
+            Shop
+            <i class="fas fa-chevron-down ms-1 arrow-icon"></i>
+          </a>
+          
+          <!-- Dropdown meni -->
+          <div class="dropdown-menu"   #dropdownMenu
+               [class.show]="showDropdown"
+                (mouseenter)="onDropdownEnter()"
+       (mouseleave)="onDropdownLeave()">
+            
+            <!-- Svi proizvodi -->
+            <div class="dropdown-section all-products">
+              <a class="dropdown-item" 
+                 (click)="navigateToAllProducts($event)"
+                 routerLink="/products" 
+                 routerLinkActive="active">
+                <div class="category-info">
+                  <div class="category-icon">
+                    <i class="fas fa-grid-2"></i>
+                  </div>
+                  <div class="category-details">
+                    <span class="category-name">Svi proizvodi</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+            
+            <!-- Glavne kategorije -->
+            <div class="dropdown-section">
+              <div class="dropdown-header">Kategorije</div>
+              <a *ngFor="let category of shopCategories"
+                 class="dropdown-item" 
+                 (click)="navigateToCategory(category.id, $event)"
+                 [routerLink]="['/products']" 
+                 [queryParams]="{ category: category.id }"
+                 routerLinkActive="active">
+                
+                <div class="category-info">
+                  <div class="category-icon">
+                    <i [class]="category.icon"></i>
+                  </div>
+                  <div class="category-details">
+                    <span class="category-name">{{ category.name }}</span>
+                    <span class="product-count">{{ category.productCount }}</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/blog" routerLinkActive="active">
+            <i class="fas fa-blog nav-icon"></i>
+            Blog
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about" routerLinkActive="active">
+            <i class="fas fa-info-circle nav-icon"></i>
+            About Us
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact" routerLinkActive="active">
+            <i class="fas fa-envelope nav-icon"></i>
+            Contact
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
   
-  <!-- Animated background elements -->
+  <!-- Pozadinski efekti -->
   <div class="nav-background">
     <div class="bg-shape shape1"></div>
     <div class="bg-shape shape2"></div>
     <div class="bg-shape shape3"></div>
   </div>
 </nav>
+
+<!-- Mobilni meni (Offcanvas) -->
+<div class="offcanvas offcanvas-start mobile-sidebar" tabindex="-1" id="mobileMenu">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Meni</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="nav-links-container">
+      <a class="nav-link" href="#" routerLinkActive="active" data-bs-dismiss="offcanvas">
+        <i class="fas fa-home nav-icon"></i>
+        Home
+      </a>
+      
+      <!-- Shop u mobilnom meniju -->
+      <div class="mobile-shop-section">
+  <a class="nav-link shop-title" data-bs-toggle="collapse" href="#shopCollapse">
+    <i class="fas fa-shopping-bag nav-icon"></i>
+    Shop
+    <i class="fas fa-chevron-down ms-auto arrow-icon"></i>
+  </a>
+  
+  <div class="collapse" id="shopCollapse">
+    <div class="mobile-shop-links">
+      <!-- Svi proizvodi -->
+      <a class="nav-link" 
+         (click)="navigateToAllProducts($event)"
+         data-bs-dismiss="offcanvas">
+        <i class="fas fa-grid-2"></i>
+        Svi proizvodi
+      </a>
+      
+      <!-- Kategorije -->
+      <div class="mobile-category-header">Kategorije</div>
+      <a class="nav-link" 
+         *ngFor="let category of shopCategories"
+         (click)="navigateToCategory(category.id, $event)"
+         data-bs-dismiss="offcanvas">
+        <i [class]="category.icon"></i>
+        {{ category.name }}
+        <span class="mobile-product-count">{{ category.productCount }}</span>
+      </a>
+      
+
+    </div>
+  </div>
+</div>
+      
+      <a class="nav-link" href="#" routerLinkActive="active" data-bs-dismiss="offcanvas">
+        <i class="fas fa-blog nav-icon"></i>
+        Blog
+      </a>
+      <a class="nav-link" href="#" routerLinkActive="active" data-bs-dismiss="offcanvas">
+        <i class="fas fa-info-circle nav-icon"></i>
+        About Us
+      </a>
+      <a class="nav-link" href="#" routerLinkActive="active" data-bs-dismiss="offcanvas">
+        <i class="fas fa-envelope nav-icon"></i>
+        Contact
+      </a>
+      
+      <!-- Mobilna korpa -->
+      <a class="nav-link mobile-cart" routerLink="/cart" routerLinkActive="active" data-bs-dismiss="offcanvas">
+        <i class="fas fa-shopping-cart nav-icon"></i>
+        Korpa
+        <span class="cart-badge" *ngIf="cartItemCount > 0">
+          {{ cartItemCount }}
+          <span class="pulse-effect"></span>
+        </span>
+      </a>
+    </div>
+  </div>
+</div>

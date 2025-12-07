@@ -1,22 +1,8 @@
 <div class="products-page">
-  <!-- Sidebar -->
-  <div class="sidebar" [class.sidebar-open]="isSidebarOpen">
-    <app-category-sidebar 
-      (categorySelected)="onCategorySelected($event)"
-      (closeSidebar)="closeSidebar()">
-    </app-category-sidebar>
-  </div>
 
   <!-- Main Content -->
   <div class="products-content">
  <!-- Sidebar -->
-  <button 
-    class="sidebar-toggle" 
-    *ngIf="!isSidebarOpen"
-    (click)="toggleSidebar()">
-    <i class="fas fa-bars"></i>
-    Prikaži filtere
-  </button>
     <!-- Loading State -->
     <div *ngIf="isLoading" class="loading-state">
       <div class="loading-spinner">

@@ -5,7 +5,7 @@ import { CartService } from '../../service/cart.service';
 import { CategorySidebarComponent } from '../../category-sidebar/category-sidebar.component';
 import { CategoryService } from '../../service/category.service';
 import { HostListener } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -54,12 +54,27 @@ export class ProductListComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
-    private cartService: CartService
+    private cartService: CartService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.loadProducts();
     this.isSidebarOpen = false;
+
+      this.route.queryParams.subscribe(params => {
+    const categoryId = params['category'];
+    
+    if (categoryId) {
+      const id = parseInt(categoryId, 10);
+      this.onCategorySelected(id);
+      
+      // Ako je mobile, otvori sidebar
+      if (window.innerWidth < 993) {
+        this.isSidebarOpen = true;
+      }
+    }
+  });
   }
 
   singleId(id: any){

@@ -3,105 +3,177 @@
   backdrop-filter: blur(20px);
   padding: 1rem 2rem;
   position: relative;
-  overflow: hidden;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
 
+  // Logo
   .navbar-brand {
-    font-weight: 700;
-    font-size: 1.8rem;
-    background: linear-gradient(45deg, #fff, #f0f0f0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
     
-    .brand-icon {
-      font-size: 2rem;
-      background: linear-gradient(45deg, #FFD700, #FFA500);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: float 3s ease-in-out infinite;
+    img {
+      max-height: 50px;
+      width: auto;
     }
   }
 
-  .nav-link {
-    color: rgba(255, 255, 255, 0.9) !important;
+  // Hamburger dugme
+  .hamburger-btn {
+    display: none;
+    border: none;
+    background: transparent;
+    padding: 0.5rem;
+    z-index: 1002;
+    
+    .navbar-toggler-icon {
+      filter: brightness(0) invert(0);
+      width: 1.5em;
+      height: 1.5em;
+    }
+  }
+
+  // Desktop korpa
+  .desktop-cart {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black !important;
+    padding: 0.5rem 1rem;
     font-weight: 500;
-    margin: 0 1rem;
-    padding: 0.5rem 1rem !important;
     border-radius: 12px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
     transition: all 0.3s ease;
-
-    .nav-icon {
-      font-size: 1.2rem;
-      transition: transform 0.3s ease;
-    }
-
-    &:hover {      
-      .nav-icon {
-        transform: scale(1.2);
-      }
-      
-      .link-underline {
-        width: 100%;
-      }
-    }
-
-    &.active {
-      .link-underline {
-        width: 100%;
-        background: #FFD700;
-      }
-    }
-  }
-
-  .cart-link {
     position: relative;
     
-    .cart-badge {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: linear-gradient(45deg, #FF3366, #FF3366);
-      color: white;
-      border-radius: 50%;
-      width: 24px;
-      height: 24px;
-      font-size: 0.8rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      animation: pulse 2s infinite;
-      
-      .pulse-effect {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        background: inherit;
-        animation: ripple 1.5s infinite;
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    
+    .cart-text {
+      margin-left: 0.5rem;
+    }
+  }
+
+  // Desktop meni
+  .desktop-menu {
+    .navbar-nav {
+      .nav-link {
+        color: black !important;
+        font-weight: 500;
+        margin: 0;
+        padding: 0.5rem 1rem !important;
+        border-radius: 12px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+
+        .nav-icon {
+          font-size: 1.2rem;
+          transition: transform 0.3s ease;
+        }
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.05);
+          
+          .nav-icon {
+            transform: scale(1.2);
+          }
+        }
       }
     }
   }
 
-  .link-underline {
+  // Mobilni sidebar (Offcanvas)
+  .mobile-sidebar {
+    width: 80% !important;
+    
+    .offcanvas-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      
+      .offcanvas-title {
+        color: black;
+        font-weight: 600;
+      }
+      
+      .btn-close {
+        filter: brightness(0);
+      }
+    }
+    
+    .offcanvas-body {
+      padding: 0;
+    }
+    
+    .nav-links-container {
+      padding: 1rem;
+      
+      .nav-link {
+        color: black !important;
+        font-weight: 500;
+        padding: 1rem 1.5rem !important;
+        border-radius: 8px;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        transition: all 0.3s ease;
+        
+        .nav-icon {
+          font-size: 1.2rem;
+          width: 24px;
+          text-align: center;
+        }
+        
+        &:hover {
+          background: rgba(0, 0, 0, 0.05);
+          text-decoration: none;
+        }
+        
+        &.active {
+          background: rgba(255, 215, 0, 0.1);
+          color: #000 !important;
+        }
+      }
+      
+      .mobile-cart {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  // Cart badge
+  .cart-badge {
     position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 2px;
-    background: #fff;
-    transition: width 0.3s ease;
+    top: -8px;
+    right: -8px;
+    background: linear-gradient(45deg, #FF3366, #FF3366);
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+    
+    .pulse-effect {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: inherit;
+      animation: ripple 1.5s infinite;
+    }
   }
 }
 
+// Pozadinski efekti
 .nav-background {
   position: absolute;
   top: 0;
@@ -142,7 +214,7 @@
   }
 }
 
-// Animations
+// Animacije
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
@@ -165,18 +237,450 @@
   }
 }
 
-// Responsive design
-@media (max-width: 1200px) {
-  .custom-navbar {   
-    .nav-link {
-      justify-content: center;
-      margin: 0.5rem 0;
+// Responsive dizajn
+// Desktop (992px i više)
+@media (min-width: 992px) {
+  .custom-navbar {
+    .hamburger-btn,
+    .mobile-sidebar,
+    .mobile-cart {
+      display: none !important;
+    }
+    
+    .navbar-brand {
+      margin-right: 2rem;
+    }
+    
+    .desktop-cart {
+      margin-left: auto;
+    }
+    
+    .desktop-menu {
+      display: flex !important;
+      flex-grow: 1;
     }
   }
 }
 
+// Mobilni uredjaji (do 991px)
+@media (max-width: 991px) {
+  .custom-navbar {
+    .hamburger-btn {
+      display: block;
+      order: 1;
+    }
+    
+    .navbar-brand {
+      order: 2;
+      margin: 0 auto;
+    }
+    
+    .desktop-cart {
+      order: 3;
+      position: relative;
+      
+      .cart-text {
+        display: none;
+      }
+    }
+    
+    .desktop-menu {
+      display: none !important;
+    }
+    
+    .mobile-sidebar {
+      display: block;
+    }
+  }
+}
+
+// Extra mali mobilni uredjaji
 @media (max-width: 388px) {
   .custom-navbar {
-    padding: 6px;
+    padding: 6px 1rem;
+    
+    .navbar-brand img {
+      max-height: 35px;
+    }
+  }
+}
+
+// Dodaj ove stilove na KRAJ tvog SCSS fajla
+
+// Mobilni sidebar (Offcanvas) stilovi
+.mobile-sidebar {
+  width: 80% !important;
+  height: 100vh !important;
+  max-width: 350px !important;
+  
+  .offcanvas-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    
+    .offcanvas-title {
+      color: black;
+      font-weight: 600;
+    }
+    
+    .btn-close {
+      filter: brightness(0);
+    }
+  }
+  
+  .offcanvas-body {
+    padding: 0;
+  }
+  
+  .nav-links-container {
+    padding: 1rem;
+    height: 100%;
+    
+    .nav-link {
+      color: black !important;
+      font-weight: 500;
+      padding: 1rem 1.5rem !important;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: all 0.3s ease;
+      
+      .nav-icon {
+        font-size: 1.2rem;
+        width: 24px;
+        text-align: center;
+      }
+      
+      &:hover {
+        background: rgba(0, 0, 0, 0.05);
+        text-decoration: none;
+      }
+      
+      &.active {
+        background: rgba(255, 215, 0, 0.1);
+        color: #000 !important;
+      }
+    }
+    
+    .mobile-cart {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+// Z-index podešavanja
+.custom-navbar {
+  .hamburger-btn {
+    z-index: 1050; // Više od offcanvas-a (1045)
+  }
+}
+
+// Offcanvas backdrop (tamnjenje pozadine)
+.offcanvas-backdrop {
+  z-index: 1040 !important;
+}
+
+// Ako imaš probleme sa visinom, dodaj i ovo
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+// Izbriši stari .mobile-sidebar iz .custom-navbar ako postoji
+.custom-navbar .mobile-sidebar {
+  display: none !important;
+}
+
+
+// Shop dropdown stilovi - ISPRAVLJENO SA Z-INDEX
+// Shop dropdown stilovi za hover
+.shop-dropdown {
+  position: relative;
+    // Proširi hover zonu
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: transparent;
+    z-index: 10000;
+  }
+   .nav-link {
+    position: relative;
+    z-index: 10001;
+    
+    .arrow-icon {
+      transition: transform 0.3s ease;
+    }
+    
+    &:hover .arrow-icon {
+      transform: rotate(180deg);
+    }
+  }
+  
+  .dropdown-menu {
+   display: none;
+  position: absolute;
+  top: 100%; // Ovo je ključno - ispod parent elementa
+  left: 0;
+  min-width: 320px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 1rem 0;
+  z-index: 9999;
+  margin-top: 5px; // Ovo dodaje mali prostor ispod linka
+ top: calc(100% + 5px);
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid white;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -20px; // Ovo preklapa prostor iznad dropdown-a
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: transparent;
+  }
+  
+  &.show {
+    display: block;
+    animation: fadeInDown 0.3s ease;
+  }
+    
+    .dropdown-section {
+      padding: 0.5rem 0;
+      
+      &.all-products {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        margin-bottom: 0.5rem;
+        padding-bottom: 1rem;
+      }
+      
+      &.quick-links {
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        margin-top: 0.5rem;
+        padding-top: 1rem;
+      }
+    }
+    
+    .dropdown-header {
+      padding: 0 1.5rem 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .dropdown-item {
+      padding: 0.75rem 1.5rem;
+      color: #333;
+      text-decoration: none;
+      display: block;
+      transition: all 0.3s ease;
+      border-radius: 0;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      
+      &:hover {
+        background: rgba(0, 0, 0, 0.03);
+        color: #000;
+        
+        .category-icon i {
+          transform: scale(1.2);
+        }
+      }
+      
+      &.active {
+        background: rgba(255, 215, 0, 0.1);
+        color: #000;
+      }
+      
+      .category-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      
+      .category-icon {
+        width: 24px;
+        text-align: center;
+        
+        i {
+          font-size: 1.1rem;
+          color: #666;
+          transition: transform 0.3s ease;
+        }
+      }
+      
+      .category-details {
+        flex-grow: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .category-name {
+        font-weight: 500;
+        font-size: 0.95rem;
+      }
+      
+      .product-count {
+        font-size: 0.8rem;
+        color: #999;
+        background: rgba(0, 0, 0, 0.05);
+        padding: 2px 8px;
+        border-radius: 10px;
+        font-weight: 500;
+      }
+      
+      // Stilovi za quick links
+      .sale-icon {
+        color: #ff3366;
+      }
+      
+      .new-icon {
+        color: #4CAF50;
+      }
+    }
+  }
+}
+
+// Animacija za dropdown
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Ako je mobile, sakrij hover efekte
+@media (max-width: 991px) {
+  .shop-dropdown {
+    .dropdown-menu {
+      position: static;
+      box-shadow: none;
+      border: none;
+      padding: 0;
+      display: none !important;
+      
+      &.show {
+        display: block !important;
+        animation: none;
+      }
+    }
+  }
+}
+
+// Ovo je ključno - navbar ne sme da ima overflow: hidden na desktopu
+.custom-navbar {
+  @media (min-width: 992px) {
+    overflow: visible !important;
+    
+    .container-fluid {
+      overflow: visible !important;
+    }
+  }
+}
+// Mobile shop stilovi - dodati z-index
+.mobile-shop-section {
+  position: relative;
+  z-index: 1050;
+  
+  .shop-title {
+    display: flex;
+    align-items: center;
+    
+    .arrow-icon {
+      transition: transform 0.3s ease;
+      font-size: 0.9rem;
+    }
+    
+    &[aria-expanded="true"] .arrow-icon {
+      transform: rotate(180deg);
+    }
+  }
+  
+  .mobile-shop-links {
+    padding-left: 2rem;
+    position: relative;
+    z-index: 1051;
+    
+    .nav-link {
+      padding: 0.75rem 1rem !important;
+      font-size: 0.95rem;
+      color: #555 !important;
+      display: flex;
+      align-items: center;
+      
+      i {
+        margin-right: 10px;
+        font-size: 1rem;
+        width: 20px;
+        text-align: center;
+        color: #666;
+      }
+      
+      &:hover {
+        color: #000 !important;
+        background: rgba(0, 0, 0, 0.05);
+        
+        i {
+          color: #FF3366;
+        }
+      }
+    }
+    
+    .all-products {
+      font-weight: 700;
+      color: #FF3366 !important;
+      margin-top: 0.5rem;
+      
+      i {
+        color: #FF3366;
+      }
+    }
+  }
+}
+
+// Dodaj ovaj deo na kraj SCSS-a da bi dropdown bio iznad navbar-a
+.custom-navbar {
+  .navbar-nav {
+    .nav-item.dropdown {
+      position: static; // Ovo omogućava dropdownu da se širi izvan parent elementa
+    }
+  }
+}
+
+// Ako i dalje ne radi, probaj ovo:
+@media (min-width: 992px) {
+  .shop-dropdown {
+    .dropdown-menu {
+      z-index: 9999 !important;
+    }
   }
 }

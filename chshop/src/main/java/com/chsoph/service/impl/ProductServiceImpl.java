@@ -31,9 +31,11 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getAllProducts() {
         List<Product> products = productRepository.findAll();
         products.forEach(p -> {
-            if (p.getImageData() != null) {
-                p.setImageBase64(Base64.getEncoder().encodeToString(p.getImageData()));
-            }
+            p.getImages().forEach(img -> {
+                if (img.getImageData() != null) {
+                    img.setImageBase64(Base64.getEncoder().encodeToString(img.getImageData()));
+                }
+            });
         });
         return products;
     }
@@ -42,9 +44,14 @@ public class ProductServiceImpl implements ProductService {
     public Product getProductById(Long id) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
-         product.setImageBase64(Base64.getEncoder().encodeToString(product.getImageData()));
-       return product;
+        product.getImages().forEach(img -> {
+            if (img.getImageData() != null) {
+                img.setImageBase64(Base64.getEncoder().encodeToString(img.getImageData()));
+            }
+        });
+        return product;
     }
+
 
     @Override
     public void deleteProduct(Long id) {

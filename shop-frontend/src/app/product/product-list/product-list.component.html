@@ -60,14 +60,6 @@
           <!-- Title -->
           <h3 class="product-title">{{ product.name }}</h3>
 
-          <!-- Description -->
-          <p class="product-description">{{ product.description }}</p>
-
-          <!-- Specifications -->
-          <div class="product-specs" *ngIf="product.specifications">
-            <i class="fas fa-list-ul"></i>
-            {{ product.specifications | slice:0:60 }}...
-          </div>
 
           <!-- Price & Actions -->
           <div class="product-footer">
@@ -76,7 +68,7 @@
                 <i class="fas fa-tag"></i>
                 {{ product.price | currency:'CHF' }}
               </div>
-              <div class="price-label">Cena</div>
+              <!-- <div class="price-label">Cena</div> -->
             </div>
 
             <button 

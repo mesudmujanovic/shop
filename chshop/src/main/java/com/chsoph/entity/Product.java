@@ -8,6 +8,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -25,11 +27,8 @@ public class Product {
 
     private int stock;
 
-    @Lob
-    @JsonIgnore
-    @Basic(fetch = FetchType.LAZY) // Eksplicitno Lazy za LOB
-    @Column(name = "image_data")
-    private byte[] imageData;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductImage> images = new ArrayList<>();
 
     private String imageType;
 

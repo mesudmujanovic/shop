@@ -26,11 +26,15 @@ export class NavigationComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
     this.loadShopCategories();
+     this.cartService.getCartItemCountObservable().subscribe(count => {
+      this.cartItemCount = count;
+    });
   }
 
   loadShopCategories(): void {

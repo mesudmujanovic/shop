@@ -1,6 +1,7 @@
 package com.chsoph.controller;
 
 import com.chsoph.entity.Product;
+import com.chsoph.entity.ProductImage;
 import com.chsoph.service.ProductService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,14 +30,21 @@ public class ProductController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Product> createProduct(
             @RequestPart("product") String productJson,
-            @RequestPart(value = "image", required = false) MultipartFile image) throws IOException {
-
+            @RequestPart(value = "images", required = false) MultipartFile[] images
+    ) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         Product product = mapper.readValue(productJson, Product.class);
 
-        if (image != null && !image.isEmpty()) {
-            product.setImageData(image.getBytes());
-            product.setImageType(image.getContentType());
+        if (images != null) {
+            for (MultipartFile img : images) {
+                if (!img.isEmpty()) {
+                    ProductImage pi = new ProductImage();
+                    pi.setImageData(img.getBytes());
+                    pi.setImageType(img.getContentType());
+                    pi.setProduct(product);
+                    product.getImages().add(pi);
+                }
+            }
         }
 
         Product saved = productService.saveProduct(product);

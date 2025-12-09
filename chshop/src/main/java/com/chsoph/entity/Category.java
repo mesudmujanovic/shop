@@ -23,7 +23,8 @@ public class Category {
     @JsonBackReference
     private Category parent;
 
+
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"category", "imageData"})
+    @JsonIgnoreProperties({"category", "images", "imageData"}) // Ignoriši category u Product
     private List<Product> products;
 }

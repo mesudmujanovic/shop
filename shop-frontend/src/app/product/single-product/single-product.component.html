@@ -9,10 +9,11 @@
 <!-- ✅ Proizvod -->
 <div class="product-container" *ngIf="product$ | async as product">
   <div class="image-wrapper">
-    <img 
-      [src]="'data:' + product.imageType + ';base64,' + product.imageBase64" 
-      [alt]="product.name"
-      loading="lazy">
+     <img 
+        [src]="getMainImage(product)" 
+        [alt]="product.name"
+        loading="lazy"
+        class="main-image">
   </div>
 
   <div class="details">

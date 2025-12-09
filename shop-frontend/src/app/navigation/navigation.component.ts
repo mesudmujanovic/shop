@@ -6,6 +6,7 @@ import { CartService } from '../service/cart.service';
 import { Product, ProductService } from '../service/product.service';
 import { CategoryService } from '../service/category.service';
 import { CategorySidebarComponent } from '../category-sidebar/category-sidebar.component';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-navigation',
@@ -27,7 +28,8 @@ export class NavigationComponent implements OnInit {
   constructor(
     private router: Router,
     private categoryService: CategoryService,
-    private cartService: CartService
+    private cartService: CartService,
+     private productService: ProductService, 
   ) {}
 
   ngOnInit(): void {
@@ -37,24 +39,39 @@ export class NavigationComponent implements OnInit {
     });
   }
 
-  loadShopCategories(): void {
-    this.categoryService.getAllCategories().subscribe({
-      next: (categories) => {
-        this.shopCategories = categories
-          .filter(category => !category.parent)
-          .map(category => ({
-            id: category.id,
-            name: category.name,
-            icon: this.getCategoryIcon(category.name),
-            productCount: category.products?.length || 0
-          }));
-      },
-      error: (error) => {
-        console.error('Greška pri učitavanju kategorija za Shop:', error);
-      }
-    });
-  }
-
+ loadShopCategories(): void {
+  this.categoryService.getAllCategories().subscribe({
+    next: (categories) => {
+      // Prvo učitaj sve kategorije
+      this.shopCategories = categories
+        .filter(category => !category.parent)
+        .map(category => ({
+          id: category.id,
+          name: category.name,
+          icon: this.getCategoryIcon(category.name),
+          productCount: 0 // Inicijalno 0
+        }));
+      
+      // Za svaku kategoriju, pozovi getCategoryById da dobiješ broj proizvoda
+      this.shopCategories.forEach((category, index) => {
+        this.categoryService.getCategoryById(category.id).subscribe({
+          next: (fullCategory) => {
+            // Ako backend vraća proizvode sa getCategoryById
+            if (fullCategory.products) {
+              this.shopCategories[index].productCount = fullCategory.products.length;
+            }
+          },
+          error: (error) => {
+            console.error(`Error loading category ${category.id}:`, error);
+          }
+        });
+      });
+    },
+    error: (error) => {
+      console.error('Greška pri učitavanju kategorija za Shop:', error);
+    }
+  });
+}
   // Bolji hover sa delay-om
   onShopEnter(): void {
     if (window.innerWidth >= 992) {

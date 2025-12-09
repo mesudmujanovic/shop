@@ -1,5 +1,6 @@
 package com.chsoph.controller;
 
+import com.chsoph.dto.ProductDTO;
 import com.chsoph.entity.Product;
 import com.chsoph.entity.ProductImage;
 import com.chsoph.service.ProductService;
@@ -17,8 +18,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/products")
@@ -28,7 +32,7 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Product> createProduct(
+    public ResponseEntity<ProductDTO> createProduct(
             @RequestPart("product") String productJson,
             @RequestPart(value = "images", required = false) MultipartFile[] images
     ) throws IOException {
@@ -36,33 +40,43 @@ public class ProductController {
         Product product = mapper.readValue(productJson, Product.class);
 
         if (images != null) {
+            List<ProductImage> productImages = new ArrayList<>();
             for (MultipartFile img : images) {
                 if (!img.isEmpty()) {
                     ProductImage pi = new ProductImage();
-                    pi.setImageData(img.getBytes());
+                    pi.setImageBase64(Base64.getEncoder().encodeToString(img.getBytes()));
                     pi.setImageType(img.getContentType());
                     pi.setProduct(product);
-                    product.getImages().add(pi);
+                    productImages.add(pi);
                 }
             }
+            product.setImages(productImages);
         }
 
         Product saved = productService.saveProduct(product);
-        return ResponseEntity.ok(saved);
+        ProductDTO dto = ProductDTO.fromEntity(saved);
+        return ResponseEntity.ok(dto);
     }
 
     @GetMapping
-    public List<Product> getAllProducts() {
-        return productService.getAllProducts();
+    public ResponseEntity<List<ProductDTO>> getAllProducts() {
+        List<Product> products = productService.getAllProducts();
+        List<ProductDTO> dtos = products.stream()
+                .map(ProductDTO::fromEntity)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(dtos);
     }
 
     @GetMapping("/{id}")
-    public Product getProductById(@PathVariable Long id) {
-        return productService.getProductById(id);
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
+        Product product = productService.getProductById(id);
+        ProductDTO dto = ProductDTO.fromEntity(product);
+        return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
+        return ResponseEntity.noContent().build();
     }
 }

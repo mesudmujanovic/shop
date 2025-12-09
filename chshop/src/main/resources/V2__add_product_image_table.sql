@@ -1,7 +1,6 @@
 CREATE TABLE product_image (
-                               id BIGINT AUTO_INCREMENT PRIMARY KEY,    -- ili SERIAL / odgovarajući tip za tvoju DB
-                               product_id BIGINT NOT NULL,
-                               image_data LONGBLOB NOT NULL,            -- ili BLOB / bytea zavisno od DB
-                               image_type VARCHAR(255),
-                               FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE
+                                id BIGSERIAL PRIMARY KEY,
+                                image_base64 TEXT NOT NULL,
+                                image_type VARCHAR(100),
+                                product_id BIGINT REFERENCES product(id) ON DELETE CASCADE
 );

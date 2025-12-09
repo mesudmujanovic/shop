@@ -21,6 +21,7 @@ export class SingleProductComponent {
 
   message: string = '';
   product$?: Observable<Product>;
+  selectedImageIndex: number = 0;
 
   ngOnInit(): void {
     this.product$ = this.route.paramMap.pipe(
@@ -32,6 +33,19 @@ export class SingleProductComponent {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(product => console.log('Loaded product:', product));
   }
+
+  getMainImage(product: Product): string {
+    if (product?.images && product.images.length > 0) {
+      const image = product.images[this.selectedImageIndex];
+      return `data:${image.imageType};base64,${image.imageBase64}`;
+    }
+    return 'assets/placeholder-image.jpg';
+  }
+
+  selectImage(index: number): void {
+    this.selectedImageIndex = index;
+  }
+
 
   addToCart(product: Product, event?: Event): void {
     const button = (event?.currentTarget as HTMLButtonElement) ?? null;

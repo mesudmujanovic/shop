@@ -31,16 +31,21 @@
            [style.animation-delay]="i * 0.1 + 's'">
         
         <!-- Product Image -->
-        <div class="product-image">
-          <div class="image-container">
-            <img [src]="product.imageBase64 ? 'data:' + product.imageType + ';base64,' + product.imageBase64 : 
-            'assets/placeholder-image.jpg'" class="product-img">
-            <div class="image-overlay">
-              <button (click)="singleId(product.id)" class="quick-view-btn">
-                <i class="fas fa-eye"></i>
-              </button>
-            </div>
-          </div>
+<div class="product-image"  (mouseenter)="setHoverState(product.id, true)"
+     (mouseleave)="setHoverState(product.id, false)">
+  
+  <div class="image-container">
+    <img [src]="getImageOnHover(product, isHovering(product.id))" 
+         class="product-img"
+         alt="{{ product.name }}"
+         [class.hovered]="isHovering(product.id)">
+    
+    <div class="image-overlay">
+      <button (click)="singleId(product.id)" class="quick-view-btn">
+        <i class="fas fa-eye"></i>
+      </button>
+    </div>
+  </div>
           
           <!-- Stock Badge -->
           <div class="stock-badge" [class.low-stock]="product.stock < 5">

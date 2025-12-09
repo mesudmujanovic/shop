@@ -12,9 +12,15 @@ import java.util.Optional;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
-    @Query("SELECT DISTINCT c FROM Category c LEFT JOIN FETCH c.products p")
-    List<Category> findAllWithProducts();
+    // Za sve kategorije sa proizvodima
+    @Query("SELECT DISTINCT c FROM Category c LEFT JOIN FETCH c.products WHERE c.parent IS NULL")
+    List<Category> findAllTopLevelWithProducts();
 
-    @Query("SELECT c FROM Category c LEFT JOIN FETCH c.products p WHERE c.id = :id")
+    // Za kategoriju sa proizvodima po ID-u
+    @Query("SELECT c FROM Category c LEFT JOIN FETCH c.products WHERE c.id = :id")
     Optional<Category> findByIdWithProducts(@Param("id") Long id);
+
+    // Broj proizvoda po kategoriji
+    @Query("SELECT COUNT(p) FROM Product p WHERE p.category.id = :categoryId")
+    Long countProductsByCategory(@Param("categoryId") Long categoryId);
 }

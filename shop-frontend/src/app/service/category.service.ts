@@ -10,6 +10,13 @@ export interface Category {
   parent?: Category;
   products?: Product[]; // Možda nećete hteti da uključite proizvode u kategoriju na frontendu, zavisno od potreba
 }
+export interface NavigationCategory {
+  id: number;
+  name: string;
+  description: string;
+  productCount: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,5 +31,9 @@ export class CategoryService {
 
     getCategoryById(id: number): Observable<Category> {
     return this.http.get<Category>(`${this.apiUrl}/categories/${id}`);
+  }
+
+    getCategoriesForNavigation(): Observable<NavigationCategory[]> {
+    return this.http.get<NavigationCategory[]>(`${this.apiUrl}/categories/for-navigation`);
   }
 }

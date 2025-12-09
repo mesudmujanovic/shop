@@ -3,17 +3,21 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environment';
 
+export interface ProductImage {
+  id?: number;
+  imageType: string;
+  imageBase64: string;
+}
+
 export interface Product {
   id: number;
   name: string;
   description: string;
   price: number;
   stock: number;
-  imageUrl: string;
   specifications: string;
-  category: any;
-    imageBase64?: string;
-  imageType?: string;
+  category?: any;
+  images: ProductImage[];
 }
 
 @Injectable({

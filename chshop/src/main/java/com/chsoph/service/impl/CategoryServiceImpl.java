@@ -1,6 +1,7 @@
 package com.chsoph.service.impl;
 
 import com.chsoph.dto.CategoryDTO;
+import com.chsoph.dto.NavigationCategoryDTO;
 import com.chsoph.dto.ProductDTO;
 import com.chsoph.entity.Category;
 import com.chsoph.repository.CategoryRepository;
@@ -42,5 +43,26 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void deleteCategory(Long id) {
         categoryRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Category> getAllCategoriesWithProducts() {
+        return categoryRepository.findAllTopLevelWithProducts();
+    }
+
+    @Override
+    public Category getCategoryWithProducts(Long id) {
+        return categoryRepository.findByIdWithProducts(id)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+    }
+
+    @Override
+    public Long getProductCountByCategory(Long categoryId) {
+        return categoryRepository.countProductsByCategory(categoryId);
+    }
+
+    @Override
+    public List<NavigationCategoryDTO> getCategoriesForNavigation() {
+        return List.of();
     }
 }

@@ -1,0 +1,98 @@
+<div class="login-page">
+  <div class="login-container">
+    <div class="header-section">
+      <div class="brand">
+        <span class="brand-name">a.g.e.stop</span>
+      </div>
+      <div class="country-indicator">
+        <span class="country-flag">🇨🇭</span>
+        <span class="country-name">{{ country }}</span>
+      </div>
+    </div>
+
+    <div class="login-card">
+      <div class="card-header">
+        <h1>Sign in or create an account</h1>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <div class="form-group">
+          <label for="login" class="form-label">Username or Email</label>
+          <input
+            type="text"
+            id="login"
+            formControlName="login"
+            class="form-input"
+            [class.error]="login?.invalid && login?.touched"
+            placeholder="Enter username or email"
+            autocomplete="username"
+          />
+          <div *ngIf="login?.invalid && login?.touched" class="error-message">
+            Username or email is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="password-header">
+            <label for="password" class="form-label">Password</label>
+            <button type="button" class="show-password" (click)="togglePasswordVisibility()">
+              {{ showPassword ? 'Hide' : 'Show' }}
+            </button>
+          </div>
+          <div class="password-input-wrapper">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              id="password"
+              formControlName="password"
+              class="form-input password-input"
+              [class.error]="password?.invalid && password?.touched"
+              placeholder="Enter password"
+              autocomplete="current-password"
+            />
+          </div>
+          <div *ngIf="password?.invalid && password?.touched" class="error-message">
+            Password is required
+          </div>
+        </div>
+
+        <div *ngIf="errorMessage" class="alert-message" [class.error]="errorMessage.includes('Invalid')">
+          {{ errorMessage }}
+        </div>
+
+        <button
+          type="submit"
+          class="submit-button"
+          [disabled]="loginForm.invalid || isLoading"
+          [class.loading]="isLoading"
+        >
+          <span *ngIf="isLoading" class="spinner"></span>
+          {{ isLoading ? 'Signing in...' : 'Sign in' }}
+        </button>
+
+        <div class="divider">
+          <span>or</span>
+        </div>
+
+        <button type="button" class="shop-button">
+          <span class="shop-icon">🛍️</span>
+          Sign in with shop
+        </button>
+
+        <div class="register-link">
+          <p>Don't have an account? 
+            <a [routerLink]="['/register']" class="link" 
+              routerLinkActive="active-link">
+              Create one
+            </a>
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <div class="footer-links">
+      <a href="#" class="footer-link">Privacy policy</a>
+      <span class="separator">•</span>
+      <a href="#" class="footer-link">Terms of service</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,156 @@
+<div class="register-page">
+  <div class="register-container">
+    <div class="header-section">
+      <div class="brand">
+        <a routerLink="/login" class="back-link">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" 
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <span class="brand-name">agestop</span>
+      </div>
+      <div class="country-indicator">
+        <span class="country-flag">🇨🇭</span>
+        <span class="country-name">{{ country }}</span>
+      </div>
+    </div>
+
+    <div class="register-card">
+      <div class="card-header">
+        <h1>Create your account</h1>
+        <p class="subtitle">Join our community today</p>
+      </div>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+        <div class="form-group">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            id="username"
+            formControlName="username"
+            class="form-input"
+            [class.error]="(username?.invalid && username?.touched) || fieldError === 'username'"
+            placeholder="Choose a username"
+            autocomplete="username"
+          />
+          <div *ngIf="username?.invalid && username?.touched" class="error-message">
+            <div *ngIf="username?.errors?.['required']">
+              Username is required
+            </div>
+            <div *ngIf="username?.errors?.['minlength']">
+              Must be at least 3 characters
+            </div>
+            <div *ngIf="username?.errors?.['maxlength']">
+              Cannot exceed 20 characters
+            </div>
+            <div *ngIf="username?.errors?.['pattern']">
+              Only letters, numbers, and underscores
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            class="form-input"
+            [class.error]="(email?.invalid && email?.touched) || fieldError === 'email'"
+            placeholder="Enter your email"
+            autocomplete="email"
+          />
+          <div *ngIf="email?.invalid && email?.touched" class="error-message">
+            <div *ngIf="email?.errors?.['required']">
+              Email is required
+            </div>
+            <div *ngIf="email?.errors?.['email']">
+              Please enter a valid email
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="password-header">
+            <label for="password" class="form-label">Password</label>
+            <button type="button" class="show-password" (click)="togglePasswordVisibility('password')">
+              {{ showPassword ? 'Hide' : 'Show' }}
+            </button>
+          </div>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            id="password"
+            formControlName="password"
+            class="form-input"
+            [class.error]="password?.invalid && password?.touched"
+            placeholder="Create a password"
+            autocomplete="new-password"
+          />
+          <div *ngIf="password?.invalid && password?.touched" class="error-message">
+            <div *ngIf="password?.errors?.['required']">
+              Password is required
+            </div>
+            <div *ngIf="password?.errors?.['minlength']">
+              Must be at least 6 characters
+            </div>
+            <div *ngIf="password?.errors?.['pattern']">
+              Include uppercase, lowercase, and number
+            </div>
+          </div>
+          <div class="password-hints">
+            <span [class.valid]="password?.value?.length >= 6"> At least 6 characters</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div *ngIf="registerForm.errors?.['passwordMismatch'] && confirmPassword?.touched" 
+               class="error-message">
+            Passwords do not match
+          </div>
+        </div>
+
+        <div *ngIf="errorMessage" class="alert-message error">
+          {{ errorMessage }}
+        </div>
+
+        <button
+          type="submit"
+          class="submit-button"
+          [disabled]="registerForm.invalid || isLoading"
+          [class.loading]="isLoading"
+        >
+          <span *ngIf="isLoading" class="spinner"></span>
+          {{ isLoading ? 'Creating account...' : 'Create account' }}
+        </button>
+
+        <div class="divider">
+          <span>or</span>
+        </div>
+
+        <button type="button" class="shop-button">
+          <span class="shop-icon">🛍️</span>
+          Sign up with shop
+        </button>
+
+        <div class="login-link">
+          <p>Already have an account? <a [routerLink]="['/login']" class="link">Sign in</a></p>
+        </div>
+
+        <div class="terms-agreement">
+          <p class="terms-text">
+            By creating an account, you agree to our 
+            <a href="#" class="terms-link">Terms of Service</a> and 
+            <a href="#" class="terms-link">Privacy Policy</a>.
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <div class="footer-links">
+      <a href="#" class="footer-link">Privacy policy</a>
+      <span class="separator">•</span>
+      <a href="#" class="footer-link">Terms of service</a>
+    </div>
+  </div>
+</div>

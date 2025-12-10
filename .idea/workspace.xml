@@ -5,32 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e7cce52-5410-4f16-8319-9623de5860ff" name="Changes" comment="&quot;Work space&quot;">
-      <change afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/dto/NavigationCategoryDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/dto/ProductImageDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/dto/AuthRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/dto/AuthResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/dto/RegisterRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/CustomUserDetailsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/JwtAuthFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/util/JwtUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/CategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/dto/CategoryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/dto/CategoryDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/dto/ProductDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/dto/ProductDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/entity/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/entity/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/entity/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/entity/ProductImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/entity/ProductImage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/repository/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/repository/CategoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/repository/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/CategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/CategoryServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/ProductServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/resources/V2__add_product_image_table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/resources/V2__add_product_image_table.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/category-sidebar/category-sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop-frontend/src/app/category-sidebar/category-sidebar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/category-sidebar/category-sidebar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shop-frontend/src/app/category-sidebar/category-sidebar.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/navigation/navigation.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shop-frontend/src/app/navigation/navigation.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/product/product-list/product-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop-frontend/src/app/product/product-list/product-list.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/product/product-list/product-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shop-frontend/src/app/product/product-list/product-list.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/product/single-product/single-product.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop-frontend/src/app/product/single-product/single-product.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/product/single-product/single-product.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shop-frontend/src/app/product/single-product/single-product.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/service/category.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shop-frontend/src/app/service/category.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/service/product.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shop-frontend/src/app/service/product.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chshop/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/UserServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +78,7 @@
     "Spring Boot.ChshopApplication.executor": "Run",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/mesud/Desktop/shop",
+    "last_opened_file_path": "C:/Users/mesud/Desktop/World-feed-backend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -174,7 +160,8 @@
       <workItem from="1762545296980" duration="7000" />
       <workItem from="1765121309142" duration="4814000" />
       <workItem from="1765221509615" duration="5293000" />
-      <workItem from="1765310547771" duration="6213000" />
+      <workItem from="1765310547771" duration="6698000" />
+      <workItem from="1765396118062" duration="1781000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;Work space&quot;">
       <created>1760890729059</created>
@@ -262,7 +249,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765230573699</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="&quot;Work space&quot;">
+      <option name="closed" value="true" />
+      <created>1765317888495</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1765317888495</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

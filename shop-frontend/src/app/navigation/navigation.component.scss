@@ -43,7 +43,6 @@
     border-radius: 12px;
     transition: all 0.3s ease;
     position: relative;
-    
     &:hover {
       background: rgba(0, 0, 0, 0.05);
     }
@@ -84,6 +83,50 @@
     }
   }
 
+.desktop-login {
+  margin-left: 2rem;
+  list-style-type: none;
+  display: none; // Dodaj ovo
+  
+  @media (min-width: 992px) {
+    display: block; // Prikaži na desktopu
+    
+    .nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background: #333;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        
+        .nav-icon {
+          color: white;
+          transform: scale(1.1);
+        }
+      }
+      
+      .nav-icon {
+        color: #333; // CRNA ikonica
+        font-size: 18px;
+        transition: all 0.3s ease;
+      }
+      
+      &.active {
+        background: #333;
+        
+        .nav-icon {
+          color: white;
+        }
+      }
+    }
+  }
+}
   // Mobilni sidebar (Offcanvas)
   .mobile-sidebar {
     width: 80% !important;

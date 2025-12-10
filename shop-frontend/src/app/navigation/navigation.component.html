@@ -91,7 +91,7 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/about" routerLinkActive="active">
             <i class="fas fa-info-circle nav-icon"></i>
-            About Us
+            Info
           </a>
         </li>
         <li class="nav-item">
@@ -102,7 +102,7 @@
         </li>
       </ul>
     </div>
-       <!-- Desktop korpa -->
+    <!-- Desktop korpa -->
     <a class="nav-link desktop-cart" routerLink="/cart" routerLinkActive="active">
       <i class="fas fa-shopping-cart nav-icon"></i>
       <span class="cart-text">Korpa</span>
@@ -111,6 +111,13 @@
         <span class="pulse-effect"></span>
       </span>
     </a>
+
+      <li class="nav-item desktop-login">
+            <a class="nav-link" routerLink="/login" routerLinkActive="active">
+          <i class="fas fa-sign-in-alt nav-icon"></i>
+        </a>
+      </li>
+
   </div>
   
   <!-- Pozadinski efekti -->
@@ -174,7 +181,7 @@
       </a>
       <a class="nav-link" href="#" routerLinkActive="active" data-bs-dismiss="offcanvas">
         <i class="fas fa-info-circle nav-icon"></i>
-        About Us
+        Info
       </a>
       <a class="nav-link" href="#" routerLinkActive="active" data-bs-dismiss="offcanvas">
         <i class="fas fa-envelope nav-icon"></i>
@@ -190,6 +197,17 @@
           <span class="pulse-effect"></span>
         </span>
       </a>
+
+        <a class="nav-link mobile-login" 
+          [routerLink]="isLoggedIn ? '/profile' : '/login'" 
+          routerLinkActive="active" 
+          data-bs-dismiss="offcanvas">
+          <i class="fas" [ngClass]="isLoggedIn ? 'fa-user-circle' : 'fa-sign-in-alt'"></i>
+          {{ isLoggedIn ? 'Profil' : 'Login' }}
+          <span class="login-status" *ngIf="isLoggedIn">
+            <i class="fas fa-circle online-indicator"></i>
+          </span>
+        </a>
     </div>
   </div>
 </div>

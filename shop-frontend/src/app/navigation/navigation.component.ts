@@ -7,6 +7,7 @@ import { Product, ProductService } from '../service/product.service';
 import { CategoryService } from '../service/category.service';
 import { CategorySidebarComponent } from '../category-sidebar/category-sidebar.component';
 import { forkJoin } from 'rxjs';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-navigation',
@@ -21,7 +22,7 @@ export class NavigationComponent implements OnInit {
   showDropdown = false;
   dropdownTimer: any;
   hoverDelay = 200; // Delay u milisekundama
-
+  isLoggedIn = false;
   @ViewChild('shopDropdown') shopDropdown!: ElementRef;
   @ViewChild('dropdownMenu') dropdownMenu!: ElementRef;
 
@@ -29,7 +30,7 @@ export class NavigationComponent implements OnInit {
     private router: Router,
     private categoryService: CategoryService,
     private cartService: CartService,
-     private productService: ProductService, 
+     private authService: UserService, 
   ) {}
 
   ngOnInit(): void {
@@ -37,6 +38,13 @@ export class NavigationComponent implements OnInit {
      this.cartService.getCartItemCountObservable().subscribe(count => {
       this.cartItemCount = count;
     });
+      this.authService.currentUser$.subscribe(user => {
+      this.isLoggedIn = !!user;
+    });
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 
  loadShopCategories(): void {

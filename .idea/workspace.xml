@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e7cce52-5410-4f16-8319-9623de5860ff" name="Changes" comment="&quot;Work space&quot;">
-      <change afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/dto/AuthRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/dto/AuthResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/dto/RegisterRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/CustomUserDetailsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/JwtAuthFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/util/JwtUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/product/product-list/product-list.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/shop-frontend/src/app/product/product-list/product-list.component.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,26 +57,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ChshopApplication.executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.git.unshallow": "true",
-    "Spring Boot.ChshopApplication.executor": "Run",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/mesud/Desktop/World-feed-backend",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ChshopApplication.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ChshopApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/mesud/Desktop/World-feed-backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn compile" />
@@ -161,7 +151,10 @@
       <workItem from="1765121309142" duration="4814000" />
       <workItem from="1765221509615" duration="5293000" />
       <workItem from="1765310547771" duration="6698000" />
-      <workItem from="1765396118062" duration="1781000" />
+      <workItem from="1765396118062" duration="2607000" />
+      <workItem from="1765402526574" duration="52000" />
+      <workItem from="1765545962617" duration="822000" />
+      <workItem from="1765546800720" duration="2859000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;Work space&quot;">
       <created>1760890729059</created>
@@ -257,7 +250,31 @@
       <option name="project" value="LOCAL" />
       <updated>1765317888495</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="&quot;Work space&quot;">
+      <option name="closed" value="true" />
+      <created>1765402482339</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1765402482339</updated>
+    </task>
+    <task id="LOCAL-00015" summary="&quot;Work space&quot;">
+      <option name="closed" value="true" />
+      <created>1765402544444</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1765402544444</updated>
+    </task>
+    <task id="LOCAL-00016" summary="&quot;Work space&quot;">
+      <option name="closed" value="true" />
+      <created>1765402568108</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1765402568108</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

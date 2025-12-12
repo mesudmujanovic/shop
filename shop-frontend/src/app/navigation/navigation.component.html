@@ -24,11 +24,10 @@
         <!-- Shop dropdown sa hover efektom -->
         <li class="nav-item shop-dropdown"
               #shopDropdown
-    (mouseenter)="onShopEnter()" 
-    (mouseleave)="onShopLeave()">
-          
+              (mouseenter)="onShopEnter()" 
+              (mouseleave)="onShopLeave()">
+                    
           <a class="nav-link dropdown-toggle" 
-             routerLink="/products" 
              routerLinkActive="active">
             <i class="fas fa-shopping-bag nav-icon"></i>
             Shop
@@ -37,26 +36,27 @@
           
           <!-- Dropdown meni -->
           <div class="dropdown-menu"   #dropdownMenu
-               [class.show]="showDropdown"
+                [class.show]="showDropdown"
                 (mouseenter)="onDropdownEnter()"
-       (mouseleave)="onDropdownLeave()">
+                (mouseleave)="onDropdownLeave()">
             
-            <!-- Svi proizvodi -->
-            <div class="dropdown-section all-products">
-              <a class="dropdown-item" 
-                 (click)="navigateToAllProducts($event)"
-                 routerLink="/products" 
-                 routerLinkActive="active">
-                <div class="category-info">
-                  <div class="category-icon">
-                    <i class="fas fa-grid-2"></i>
-                  </div>
-                  <div class="category-details">
-                    <span class="category-name" routerLink="/products">Svi proizvodi</span>
-                  </div>
-                </div>
-              </a>
-            </div>
+         <!-- Svi proizvodi -->
+<div class="dropdown-section all-products">
+  <a class="dropdown-item"
+     (click)="navigateToAllProducts($event)"
+     routerLinkActive="active">
+     
+    <div class="category-info">
+      <div class="category-icon">
+        <i class="fas fa-grid-2"></i>
+      </div>
+      <div class="category-details">
+        <span class="category-name">Svi proizvodi</span>
+      </div>
+    </div>
+
+  </a>
+</div>
             
             <!-- Glavne kategorije -->
             <div class="dropdown-section">

@@ -1,7 +1,7 @@
 // navigation.component.ts
 import { Component, ElementRef, HostListener, inject, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CartService } from '../service/cart.service';
 import { Product, ProductService } from '../service/product.service';
 import { CategoryService } from '../service/category.service';
@@ -25,21 +25,49 @@ export class NavigationComponent implements OnInit {
   isLoggedIn = false;
   @ViewChild('shopDropdown') shopDropdown!: ElementRef;
   @ViewChild('dropdownMenu') dropdownMenu!: ElementRef;
+  products: any[] = [];
 
   constructor(
     private router: Router,
     private categoryService: CategoryService,
     private cartService: CartService,
      private authService: UserService, 
+         private route: ActivatedRoute,
+
   ) {}
 
   ngOnInit(): void {
+
+  this.route.queryParams.subscribe(params => {
+      const categoryId = +params['category'] || 0; // 0 = svi proizvodi
+
+      if (categoryId === 0) {
+        this.loadAllProducts();
+      } else {
+        this.loadProductsByCategory(categoryId);
+      }
+    });
+  
+    
     this.loadShopCategories();
      this.cartService.getCartItemCountObservable().subscribe(count => {
       this.cartItemCount = count;
     });
       this.authService.currentUser$.subscribe(user => {
       this.isLoggedIn = !!user;
+    });
+  }
+
+
+  loadAllProducts(): void {
+    this.categoryService.getAllCategories().subscribe(categories => {
+      // Spoji sve proizvode iz svih kategorija
+      this.products = categories.flatMap(cat => cat.products || []);
+    });
+  }
+  loadProductsByCategory(categoryId: number): void {
+    this.categoryService.getCategoryById(categoryId).subscribe(category => {
+      this.products = category.products || [];
     });
   }
 
@@ -131,8 +159,11 @@ export class NavigationComponent implements OnInit {
       event.stopPropagation();
     }
     
-    this.router.navigate(['/products']);
     this.showDropdown = false;
+    console.log("S")
+this.router.navigate(['/products'], {
+    queryParams: {} // Prazan query string za sve proizvode
+  });
   }
 
   // Globalni listener za klik van dropdown-a

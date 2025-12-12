@@ -24,6 +24,59 @@ export class ProductListComponent implements OnInit {
   selectedCategoryId: number | null = null;
   isSidebarOpen: any;
 
+  ngOnInit(): void {
+    console.log("product ki")
+    this.loadProducts();
+    this.isSidebarOpen = false;
+  // Osluškuj promene query parametara
+    this.route.queryParams.subscribe(params => {
+      console.log('Query params changed:', params);
+      
+      const categoryId = params['category'];
+      this.selectedCategoryId = categoryId ? +categoryId : null;
+        
+      // Ako imamo proizvode, filtriraj ih
+      if (this.products.length > 0) {
+        this.filterProducts();
+      }
+    });
+
+
+      this.route.queryParams.subscribe(params => {
+    const categoryId = params['category'];
+    
+    if (categoryId) {
+      const id = parseInt(categoryId, 10);
+      this.onCategorySelected(id);
+      
+      // Ako je mobile, otvori sidebar
+      if (window.innerWidth < 993) {
+        this.isSidebarOpen = true;
+      }
+    }
+  });
+  }
+
+  constructor(
+    private productService: ProductService,
+    private categoryService: CategoryService,
+    private cartService: CartService,
+    private route: ActivatedRoute
+  ) {
+     this.filter$.pipe(
+      switchMap(categoryId => {
+        if (categoryId === null) {
+          return of(this.products);
+        } else {
+          return of(this.products.filter(p => p.category?.id === categoryId));
+        }
+      })
+    ).subscribe(filtered => {
+      this.filteredProducts = filtered;
+      this.preloadFilteredImages();
+    });
+  }
+
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
     document.body.style.overflow = this.isSidebarOpen ? 'hidden' : '';
@@ -51,44 +104,7 @@ private filterSubject = new BehaviorSubject<number | null>(null);
   private filter$ = this.filterSubject.asObservable().pipe(
     debounceTime(100) // Debounce za 100ms
   );
-  constructor(
-    private productService: ProductService,
-    private categoryService: CategoryService,
-    private cartService: CartService,
-    private route: ActivatedRoute
-  ) {
-     this.filter$.pipe(
-      switchMap(categoryId => {
-        if (categoryId === null) {
-          return of(this.products);
-        } else {
-          return of(this.products.filter(p => p.category?.id === categoryId));
-        }
-      })
-    ).subscribe(filtered => {
-      this.filteredProducts = filtered;
-      this.preloadFilteredImages();
-    });
-  }
   
-  ngOnInit(): void {
-    this.loadProducts();
-    this.isSidebarOpen = false;
-
-      this.route.queryParams.subscribe(params => {
-    const categoryId = params['category'];
-    
-    if (categoryId) {
-      const id = parseInt(categoryId, 10);
-      this.onCategorySelected(id);
-      
-      // Ako je mobile, otvori sidebar
-      if (window.innerWidth < 993) {
-        this.isSidebarOpen = true;
-      }
-    }
-  });
-  }
 
   singleId(id: any){
     this.routerId.navigate(['/products', id])

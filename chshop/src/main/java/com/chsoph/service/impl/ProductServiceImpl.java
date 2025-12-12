@@ -1,7 +1,5 @@
 package com.chsoph.service.impl;
 
-import com.chsoph.dto.ProductDTO;
-import com.chsoph.dto.ProductImageDTO;
 import com.chsoph.entity.Category;
 import com.chsoph.entity.Product;
 import com.chsoph.entity.ProductImage;
@@ -12,9 +10,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Base64;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

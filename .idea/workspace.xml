@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e7cce52-5410-4f16-8319-9623de5860ff" name="Changes" comment="&quot;Work space&quot;" />
+    <list default="true" id="5e7cce52-5410-4f16-8319-9623de5860ff" name="Changes" comment="&quot;Work space&quot;">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/chshop/src/main/java/com/chsoph/service/impl/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop-frontend/src/app/product/product-list/product-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/shop-frontend/src/app/product/product-list/product-list.component.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -151,7 +157,7 @@
       <workItem from="1765396118062" duration="2607000" />
       <workItem from="1765402526574" duration="52000" />
       <workItem from="1765545962617" duration="822000" />
-      <workItem from="1765546800720" duration="3465000" />
+      <workItem from="1765546800720" duration="5363000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;Work space&quot;">
       <created>1760890729059</created>

@@ -3,6 +3,7 @@ package com.chsoph.controller;
 import com.chsoph.dto.ProductDTO;
 import com.chsoph.entity.Product;
 import com.chsoph.entity.ProductImage;
+import com.chsoph.repository.ProductRepository;
 import com.chsoph.service.ProductService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,10 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -30,6 +28,7 @@ import java.util.stream.Collectors;
 @CrossOrigin("*")
 public class ProductController {
     private final ProductService productService;
+    private final ProductRepository productRepository;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ProductDTO> createProduct(
@@ -78,5 +77,22 @@ public class ProductController {
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/bestsellers")
+    public ResponseEntity<List<ProductDTO>> getBestsellers() {
+        List<Product> allProducts = productRepository.findAll();
+
+        // Izaberi random 10
+        Collections.shuffle(allProducts);
+        List<Product> randomTen = allProducts.stream()
+                .limit(12)
+                .collect(Collectors.toList());
+
+        List<ProductDTO> dtos = randomTen.stream()
+                .map(ProductDTO::fromEntity)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(dtos);
     }
 }

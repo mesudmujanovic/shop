@@ -40,23 +40,21 @@
                 (mouseenter)="onDropdownEnter()"
                 (mouseleave)="onDropdownLeave()">
             
-         <!-- Svi proizvodi -->
-<div class="dropdown-section all-products">
-  <a class="dropdown-item"
-     (click)="navigateToAllProducts($event)"
-     routerLinkActive="active">
-     
-    <div class="category-info">
-      <div class="category-icon">
-        <i class="fas fa-grid-2"></i>
-      </div>
-      <div class="category-details">
-        <span class="category-name">Svi proizvodi</span>
-      </div>
-    </div>
-
-  </a>
-</div>
+            <!-- Svi proizvodi -->
+            <div class="dropdown-section all-products">
+              <a class="dropdown-item" 
+               
+                 routerLinkActive="active">
+                <div class="category-info">
+                  <div class="category-icon">
+                    <i class="fas fa-grid-2"></i>
+                  </div>
+                  <div class="category-details">
+                    <span class="category-name"   (click)="navigateToAllProducts($event)">Svi proizvodi</span>
+                  </div>
+                </div>
+              </a>
+            </div>
             
             <!-- Glavne kategorije -->
             <div class="dropdown-section">
@@ -136,7 +134,7 @@
   </div>
   <div class="offcanvas-body">
     <div class="nav-links-container">
-      <a class="nav-link" href="#" routerLinkActive="active" data-bs-dismiss="offcanvas">
+      <a class="nav-link" routerLink="/home" routerLinkActive="active" data-bs-dismiss="offcanvas">
         <i class="fas fa-home nav-icon"></i>
         Home
       </a>

@@ -3,7 +3,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from '../../environment';
-
+export interface CartItem {
+  productId: number;
+  name: string;
+  price: number;
+  image: string;
+  quantity: number;
+}
 export interface CartItemRequest {
   productId: number;
   quantity: number;

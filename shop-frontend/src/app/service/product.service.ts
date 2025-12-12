@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { environment } from '../../environment';
 
 export interface ProductImage {
@@ -39,4 +39,13 @@ export class ProductService {
   createProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(`${this.apiUrl}/products`, product);
   }
+
+  getBestsellers(): Observable<Product[]> {
+  return this.http.get<Product[]>(`${this.apiUrl}/products/bestsellers`).pipe(
+    tap(response => {
+      console.log(`${this.apiUrl}/products/bestsellers`)
+      console.log('Bestsellers response from server:', response);
+    })
+  );
+}
 }

@@ -25,11 +25,11 @@ export class ProductListComponent implements OnInit {
   isSidebarOpen: any;
 
   ngOnInit(): void {
-    console.log("product ki")
+    this.productService.getBestsellers().subscribe();
     this.loadProducts();
     this.isSidebarOpen = false;
   // Osluškuj promene query parametara
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe(params => {    
       console.log('Query params changed:', params);
       
       const categoryId = params['category'];

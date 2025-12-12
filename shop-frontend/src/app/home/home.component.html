@@ -5,3 +5,109 @@
   <!-- Mobile slika (sakrivena na desktop) -->
   <img src="homemob.webp" alt="Uvodna slika" class="hero-img mobile-img">
 </div>
+
+
+<section class="bestseller-section" *ngIf="bestsellers.length > 0">
+     <div *ngIf="message" 
+         [class]="message.includes('Greška') ? 'message-error' : 'message-success'">
+      <i [class]="message.includes('Greška') ? 'fas fa-exclamation-triangle' : 'fas fa-check-circle'"></i>
+      {{ message }}
+    </div>
+
+  <!-- Section Header -->
+  <div class="section-header">
+    <h2 class="section-title">BESTSELLER PROIZVODI</h2>
+    <p class="section-subtitle">Najtraženiji proizvodi koje naši kupci obožavaju</p>
+  </div>
+
+  <!-- Slider Container -->
+  <div class="slider-wrapper">
+    
+    <!-- Prev Button -->
+    <button class="slider-arrow prev" (click)="prevSlide()" [disabled]="currentSlide === 0">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+
+    <!-- Slider Container -->
+    <div class="slider-container" #sliderContainer
+     (touchstart)="onTouchStart($event)"
+  (touchmove)="onTouchMove($event)"
+  (touchend)="onTouchEnd($event)">
+      
+      <!-- Slider Track -->
+      <div 
+        class="slider-track" 
+        [style.transform]="'translateX(' + (-currentSlide * 100) + '%)'"
+        [style.transition]="isAnimating ? 'transform 0.5s ease' : 'none'"
+      >
+        
+        <!-- Slides -->
+        <div class="slide" *ngFor="let product of bestsellers; let i = index">
+          <div class="product-card">
+            
+            <!-- Product Image -->
+            <div class="product-image">
+              <img 
+                [src]="getProductImage(product)" 
+                [alt]="product.name"
+                (error)="handleImageError($event)"
+                class="product-img">
+              <div class="product-badge">BESTSELLER</div>
+            </div>
+            
+            <!-- Product Info -->
+            <div class="product-info">
+              <h3 class="product-title">{{ product.name }}</h3>
+        
+              <!-- Price -->
+              <div class="product-price">
+                <span class="current-price">{{ product.price }} €</span>
+              </div>
+              
+              <!-- Actions -->
+              <div class="product-actions">
+                <button class="btn-view" [routerLink]="['/products', product.id]">
+                  <i class="fas fa-eye"></i> Detalji
+                </button>
+               <button 
+              (click)="addToCart(product)" 
+              [disabled]="product.stock === 0"
+              class="add-to-cart-btn"
+              [class.disabled]="product.stock === 0">
+              
+              <span class="btn-content">
+                <i class="fas fa-shopping-cart"></i>
+                {{ product.stock === 0 ? 'Nema na stanju' : 'Dodaj u korpu' }}
+              </span>
+              
+              <span class="btn-loader">
+                <i class="fas fa-spinner fa-spin"></i>
+              </span>
+            </button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- Next Button -->
+    <button class="slider-arrow next" (click)="nextSlide()" [disabled]="currentSlide >= maxSlides">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+
+  </div>
+
+  <!-- Dots Navigation -->
+  <div class="slider-dots">
+    <span 
+      *ngFor="let dot of getDotsArray(); let i = index" 
+      class="dot" 
+      [class.active]="currentSlide === i"
+      (click)="goToSlide(i)">
+    </span>
+  </div>
+
+</section>

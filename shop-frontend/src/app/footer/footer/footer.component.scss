@@ -1,127 +1,372 @@
+// Promenljive za boje - Bela tema
+$primary-color: #ffffff; // Bela pozadina
+$secondary-color: #d4af37; // Zlatna
+$accent-color: #c2185b; // Tamno ružičasta (Age Stop brend)
+$text-dark: #1a365d; // Tamno plava za tekst
+$text-medium: #4a5568; // Srednje siva
+$text-light: #718096; // Svetlo siva
+$border-color: rgba(0, 0, 0, 0.08); // Suptilne sive granice
+$background-light: #f8f9fa; // Svetlo siva za hover efekte
+$shadow-color: rgba(0, 0, 0, 0.05); // Blaga senka
+
+// Mixin za responsive dizajn
+@mixin responsive($breakpoint) {
+  @if $breakpoint == tablet {
+    @media (max-width: 992px) { @content; }
+  }
+  @if $breakpoint == mobile {
+    @media (max-width: 768px) { @content; }
+  }
+}
+
 .footer {
-  background: linear-gradient(135deg,
-    rgba(1, 50, 32, 0.95) 0%, 
-    rgba(5, 80, 50, 0.95) 50%, 
-    rgba(212, 175, 55, 0.3) 100%);
-  color: #ddd;
-  padding: 60px 0 20px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background-color: $primary-color;
+  color: $text-dark;
+  margin-top: auto;
+  border-top: 1px solid $border-color;
+  box-shadow: 0 -2px 30px $shadow-color;
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
 }
 
-.footer-container {
-  max-width: 1200px;
-  margin: 0 auto;
+// Gornji banner
+.footer-banner {
+  background: linear-gradient(135deg, lighten($accent-color, 45%) 0%, lighten($accent-color, 40%) 100%);
+  border-bottom: 1px solid rgba($accent-color, 0.1);
+  padding: 22px 0;
+  
+  .slogan {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0;
+    color: $accent-color;
+    
+    @include responsive(mobile) {
+      font-size: 1rem;
+      letter-spacing: 1px;
+    }
+  }
+}
+
+// Glavni sadržaj
+.footer-sadrzaj {
+  padding: 60px 0 40px;
+  
+  @include responsive(tablet) {
+    padding: 40px 0 30px;
+  }
+}
+
+.footer-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 40px;
-  padding: 0 20px;
+  
+  @include responsive(tablet) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+  
+  @include responsive(mobile) {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
 }
 
-/* Footer Column Styles */
-.footer-col-header {
+.footer-sekcija {
+  &:first-child {
+    grid-column: span 1;
+    
+    @include responsive(tablet) {
+      grid-column: span 2;
+    }
+    
+    @include responsive(mobile) {
+      grid-column: span 1;
+    }
+  }
+}
+
+.footer-logo {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  color: $text-dark;
+  
+  span {
+    color: $accent-color;
+    font-weight: 300;
+  }
+}
+
+.footer-tagline {
+  color: $text-medium;
+  font-size: 0.9rem;
+  margin-bottom: 25px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+// Socijalne mreže
+.socijalne-mreze {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.socijalni-dugme {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 1px solid $border-color;
+  background: transparent;
+  color: $text-medium;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  i {
+    font-size: 1.2rem;
+  }
+  
+  &:hover {
+    background: $accent-color;
+    color: $primary-color;
+    border-color: $accent-color;
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 5px 15px rgba($accent-color, 0.2);
+  }
+  
+  &:active {
+    transform: translateY(-1px) scale(1.05);
+  }
+}
+
+// Naslovi i liste
+.footer-naslov {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  color: $text-dark;
+  position: relative;
+  padding-bottom: 10px;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 2px;
+    background: $secondary-color;
+  }
+  
+  &.kontakt-naslov {
+    margin-top: 25px;
+  }
+}
+
+.footer-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 25px 0;
+  
+  li {
+    margin-bottom: 12px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    a {
+      color: $text-medium;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      font-weight: 400;
+      
+      &::before {
+        content: '›';
+        margin-right: 8px;
+        color: $accent-color;
+        transition: transform 0.2s ease;
+        font-weight: bold;
+      }
+      
+      &:hover {
+        color: $accent-color;
+        padding-left: 5px;
+        
+        &::before {
+          transform: translateX(3px);
+          color: $accent-color;
+        }
+      }
+    }
+  }
+}
+
+// Kontakt informacije
+.kontakt-info {
+  p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 10px 0;
+    color: $text-medium;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    i {
+      color: $accent-color;
+      width: 20px;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// Informacije o firmi
+.firma-info {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid $border-color;
+  
+  p {
+    margin: 0 0 8px 0;
+    font-size: 0.85rem;
+    color: $text-light;
+    line-height: 1.4;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// Donji deo footera
+.footer-bottom {
+  background-color: $background-light;
+  border-top: 1px solid $border-color;
+  padding: 22px 0;
+}
+
+.bottom-sadrzaj {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0;
-  cursor: pointer;
+  
+  @include responsive(mobile) {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  p {
+    margin: 0;
+    color: $text-light;
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
 }
 
-.footer-arrow {
-  color: #D4AF37;
-  font-size: 12px;
-  transition: transform 0.3s ease;
-}
-
-.footer-col-content {
-  transition: all 0.3s ease;
-}
-
-.footer-col h2, .footer-col h3 {
-  color: #D4AF37;
-  margin-bottom: 0;
-  font-size: 1.2rem;
-}
-
-.footer-col p, 
-.footer-col a {
-  color: #ccc;
-  text-decoration: none;
-  margin-bottom: 8px;
-  transition: 0.3s;
-  display: block;
-}
-
-.footer-col a:hover {
-  color: #D4AF37;
-}
-
-.footer-bottom {
-  text-align: center;
-  border-top: 1px solid rgba(212, 175, 55, 0.3);
-  margin-top: 20px;
-  padding-top: 15px;
-  color: #999;
-}
-
-.footer-bottom span {
-  color: #D4AF37;
-}
-
-@media (max-width: 991.98px) {
- .footer{
-        padding: 30px 0 20px;
+.bottom-linkovi {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  
+  @include responsive(mobile) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  a {
+    color: $text-medium;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+    font-weight: 400;
+    
+    &:hover {
+      color: $accent-color;
     }
-
-  .footer-container {
-    grid-template-columns: 1fr;
-    gap: 0;
   }
   
-  .footer-col {
-    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-    padding: 15px 0;
-  }
-  
-  .footer-col:last-child {
-    border-bottom: none;
-  }
-  
-  /* Sakrij strelicu na desktopu, prikaži na mobilnom */
-  .footer-arrow {
-    display: block;
-  }
-  
-  /* Collapse funkcionalnost */
-  .footer-col-content.collapse:not(.show) {
-    display: none;
-  }
-  
-  .footer-col-header[aria-expanded="true"] .footer-arrow,
-  .footer-col-header.collapsed .footer-arrow {
-    transform: rotate(180deg);
+  .separator {
+    color: $border-color;
   }
 }
 
-/* DESKTOP STILOVI (iznad lg breakpointa) */
-@media (min-width: 992px) {
-  .footer-arrow {
-    display: none !important;
+// Animacije
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.footer-sekcija {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+  
+  &:nth-child(1) { animation-delay: 0.1s; }
+  &:nth-child(2) { animation-delay: 0.2s; }
+  &:nth-child(3) { animation-delay: 0.3s; }
+  &:nth-child(4) { animation-delay: 0.4s; }
+}
+
+// Dodatni stilovi za bolju čitljivost
+.footer {
+  a {
+    &:focus {
+      outline: 2px solid rgba($accent-color, 0.3);
+      outline-offset: 2px;
+    }
   }
   
-  .footer-col-header {
-    cursor: default;
-    pointer-events: none;
+  .footer-sekcija {
+    &:hover {
+      .footer-naslov::after {
+        width: 60px;
+        transition: width 0.3s ease;
+      }
+    }
   }
+}
+
+// Efekat za hover na celoj sekciji
+.footer-sekcija {
+  padding: 15px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
   
-  /* Osiguraj da je sve vidljivo na desktopu */
-  .footer-col-content.collapse {
-    display: block !important;
-    height: auto !important;
+  &:hover {
+    background-color: rgba($background-light, 0.5);
   }
-  
-  /* Ukloni Bootstrap collapse efekte na desktopu */
-  .footer-col-content {
-    opacity: 1 !important;
-    visibility: visible !important;
+}
+
+// Responsive dodatak
+@include responsive(mobile) {
+  .footer-sekcija {
+    padding: 0;
+    &:hover {
+      background-color: transparent;
+    }
   }
 }

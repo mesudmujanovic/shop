@@ -45,11 +45,7 @@ body {
 //     rgba(5, 80, 50, 0.95) 50%, 
 //     rgba(212, 175, 55, 0.3) 100%);
 
-background: linear-gradient(135deg,
-    rgb(243, 193, 179) 0%,     /* puder roze */
-    rgba(241, 211, 180, 0.9) 50%,  /* puder bež */
-    rgba(248, 226, 202, 0.9) 100%  /* champagne powder */
-);
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%);
 
 
 }

@@ -1,0 +1,123 @@
+<section class="ace-switzerland-section">
+  <!-- Header -->
+  <div class="header-container" @fadeInUp>
+    <div class="logo-line">
+      <div class="swiss-dot"></div>
+      <h1 class="main-logo">a.g.e.stop<span class="registered">®</span></h1>
+      <div class="swiss-dot"></div>
+    </div>
+    
+    <h2 class="country-subtitle">SWITZERLAND</h2>
+    
+    <div class="welcome-container">
+      <div class="line-decor left"></div>
+      <h3 class="welcome-title">WELCOME TO SWITZERLAND</h3>
+      <div class="line-decor right"></div>
+    </div>
+    
+    <p class="header-description">
+      Where 15 years of international research meets Swiss precision engineering. 
+      <span class="highlight-text">Established 2015 in Zug</span> by Lilia Bassi.
+    </p>
+  </div>
+
+  <!-- Image + Description Items -->
+  <div class="content-container">
+    <div 
+      *ngFor="let item of images; let i = index; trackBy: trackById" 
+      class="item-container"
+      [class.flipped]="item.flipped"
+      [@staggerFade]
+      [style.animation-delay]="getStaggerDelay(i)"
+    >
+      <!-- Image Container -->
+      <div class="image-wrapper">
+        <div 
+          class="image-container"
+          [@imageHover]="hoverStates[i]"
+          (mouseenter)="onMouseEnter(i)"
+          (mouseleave)="onMouseLeave(i)"
+        >
+          <img 
+            [src]="item.imageUrl" 
+            [alt]="item.altText"
+            loading="lazy"
+            class="product-image"
+          />
+          
+          <!-- Swiss Badge -->
+          <div class="swiss-badge">
+            <span class="ch-cross">†</span>
+            <span>SWISS MADE</span>
+          </div>
+          
+          <!-- Image Number -->
+          <div class="image-number">0{{item.id}}</div>
+        </div>
+        
+        <!-- Image Shadow Effect -->
+        <div class="image-shadow"></div>
+      </div>
+      
+      <!-- Description Container -->
+      <div class="description-wrapper">
+        <div class="description-content">
+          <!-- Title with animated underline -->
+          <h4 class="item-title">
+            {{item.title}}
+            <span class="title-underline"></span>
+          </h4>
+          
+          <!-- Description Text -->
+          <p class="item-description">{{item.description}}</p>
+          
+          <!-- Highlight Box -->
+          <div class="highlight-box" *ngIf="item.highlight">
+            <div class="highlight-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" 
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <p class="highlight-text">{{item.highlight}}</p>
+          </div>
+          
+          <!-- Features -->
+          <div class="features-container" *ngIf="item.features">
+            <div class="feature-chip" *ngFor="let feature of item.features">
+              <span class="feature-dot"></span>
+              {{feature}}
+            </div>
+          </div>
+          
+          <!-- Decorative Element -->
+          <div class="decorative-line">
+            <div class="line-part"></div>
+            <div class="swiss-icon">CH</div>
+            <div class="line-part"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <div class="footer-container" @fadeInUp>
+    <div class="footer-content">
+      <p class="footer-text">
+        ACE STOP SWITZERLAND produces results-driven skincare products of exceptionally high standards, 
+        by utilising scientifically proven and internationally acclaimed Swiss Ingredients and award winning 
+        Swiss formulating technologies.
+      </p>
+      
+      <div class="footer-logo">
+        <span class="footer-logo-text">a.g.e.stop®</span>
+        <span class="footer-logo-sub">SWITZERLAND</span>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      © 2023 ACE STOP SWITZERLAND. All rights reserved. | Zug, Switzerland
+    </div>
+  </div>
+</section>

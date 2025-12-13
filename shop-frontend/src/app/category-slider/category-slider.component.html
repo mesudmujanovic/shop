@@ -1,0 +1,20 @@
+<div class="categories-container">
+  <div class="categories-grid">
+    <div *ngFor="let category of categories" class="category-card">
+      <a [routerLink]="category.url" class="category-link">
+        <div class="category-image-container">
+          <img 
+            [src]="category.image" 
+            [alt]="category.alt" 
+            class="category-image"
+            loading="lazy"
+          />
+        </div>
+        <div class="category-content">
+          <h3 class="category-title">{{ category.title }}</h3>
+          <p class="category-description">{{ category.description }}</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

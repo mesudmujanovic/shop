@@ -1,0 +1,175 @@
+<div class="gallery-container">
+  <!-- Header Section -->
+  <header class="gallery-header">
+    <div class="header-content">
+      <h1 class="main-title">Swiss Luxury Skincare Collection</h1>
+      <p class="subtitle">Discover the pinnacle of Swiss anti-aging innovation, where science meets luxury to reveal your most radiant skin</p>
+      <div class="swiss-badge">
+        <i class="fas fa-star"></i>
+        <span>SWISS PRECISION FORMULAE</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Gallery Grid -->
+  <div class="gallery-grid" [ngStyle]="{'grid-template-columns': gridTemplateColumns}">
+    <div class="product-item" *ngFor="let product of products; let i = index" [ngStyle]="getProductStyle(i)">
+      <div class="product-image-container">
+        <img 
+          [src]="product.image" 
+          [alt]="product.title"
+          class="product-image"
+          (click)="viewProduct(product.id)"
+        />
+        <div class="product-badge" *ngIf="product.category">
+          {{ product.category }}
+        </div>
+        <div class="image-overlay" (click)="onOverlayClick($event, product.id)">
+          <div class="overlay-content">
+            <i class="fas fa-search-plus"></i>
+            <span>View Details</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="product-info">
+        <h3 class="product-title">{{ product.title }}</h3>
+        <p class="product-description">{{ product.shortDescription }}</p>
+        <div class="product-actions">
+          <button class="read-more-btn" (click)="viewProduct(product.id)">
+            <span>Read More</span>
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="gallery-footer">
+    <div class="footer-content">
+      <div class="brand-logo">
+        <span class="logo-text">AgeStop</span>
+        <span class="logo-subtext">Switzerland</span>
+      </div>
+      <p class="footer-description">
+        Swiss-engineered skincare combining cutting-edge biotechnology with luxurious formulations. 
+        Each product is crafted with precision to deliver visible, lasting results.
+      </p>
+    </div>
+  </footer>
+</div>
+
+<!-- Single Product View Modal -->
+<div class="single-product-modal" [class.active]="showSingleView">
+  <div class="modal-overlay" (click)="closeSingleView()"></div>
+  
+  <div class="modal-content">
+    <!-- Close Button -->
+    <button class="close-btn" (click)="closeSingleView()">
+      <i class="fas fa-times"></i>
+    </button>
+    
+    <!-- Product Content -->
+    <div class="modal-body" *ngIf="selectedProduct">
+      <!-- Full Width Image at Top -->
+      <div class="full-width-image">
+        <img 
+          [src]="selectedProduct.image" 
+          [alt]="selectedProduct.title" 
+          class="hero-main-image"
+        />
+        <div class="image-overlay-text">
+          <div class="overlay-category">{{ selectedProduct.category }}</div>
+          <h1 class="overlay-title">{{ selectedProduct.title }}</h1>
+        </div>
+      </div>
+      
+      <!-- Details Below Image -->
+      <div class="product-details-container">
+        <div class="details-content">
+          <!-- Product Meta -->
+          <div class="product-meta">
+            <div class="meta-left">
+              <span class="product-id">Product ID: #{{ selectedProduct.id }}</span>
+              <span class="product-date">Added: {{ today | date:'MMMM d, yyyy' }}</span>
+            </div>
+            <div class="meta-right">
+              <button class="share-btn">
+                <i class="fas fa-share-alt"></i>
+                Share
+              </button>
+              <button class="save-btn">
+                <i class="far fa-bookmark"></i>
+                Save
+              </button>
+            </div>
+          </div>
+          
+          <!-- Main Description -->
+          <div class="main-description">
+            <h2>Product Overview</h2>
+            <div class="description-text" [innerHTML]="selectedProduct.fullDescription"></div>
+          </div>
+          
+          <!-- Features Grid -->
+          <div class="features-section">
+            <h3>Key Benefits & Features</h3>
+            <div class="features-grid">
+              <div class="feature-card" *ngFor="let feature of selectedProduct.features">
+                <div class="feature-icon">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="feature-content">
+                  <h4>{{ feature }}</h4>
+                  <p>Premium Swiss formulation delivers visible results for radiant, youthful skin.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Technical Specs -->
+          <div class="specs-section">
+            <h3>Technical Specifications</h3>
+            <div class="specs-grid">
+              <div class="spec-item">
+                <span class="spec-label">Category:</span>
+                <span class="spec-value">{{ selectedProduct.category }}</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Formulation:</span>
+                <span class="spec-value">Swiss Precision</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Skin Type:</span>
+                <span class="spec-value">All Skin Types</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Results:</span>
+                <span class="spec-value">Visible in 28 Days</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Call to Action -->
+          <div class="cta-section">
+            <div class="cta-content">
+              <h3>Experience Swiss Luxury</h3>
+              <p>Ready to transform your skincare routine with premium Swiss technology?</p>
+            </div>
+            <div class="cta-buttons">
+              <button class="back-btn" (click)="closeSingleView()">
+                <i class="fas fa-arrow-left"></i>
+                Back to Gallery
+              </button>
+              <button class="inquiry-btn">
+                <i class="fas fa-envelope"></i>
+                Request Information
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -76,8 +76,7 @@
 
 .bestseller-section {
   padding: 60px 20px;
-  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-  max-width: 1400px;
+  background: white;
   margin: 0 auto;
   overflow: hidden;
 
@@ -241,11 +240,13 @@
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-
+    background-color: antiquewhite;
     .product-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #2c3e50;
+      margin: 0  !important;
+      padding: 0 !important;
+      font-size: 21px;
+      font-weight: 400;
+      color: #726d6d;
       margin-bottom: 15px;
       line-height: 1.3;
       overflow: hidden;
@@ -267,7 +268,7 @@
     }
 
     .product-price {
-      margin-bottom: 20px;
+      margin-bottom: 0px;
       text-align: center;
 
       .current-price {
@@ -547,7 +548,7 @@
   .product-card {
     .product-info {
       padding: 12x;
-
+       
       .product-title {
         font-size: 1.2rem;
       }
@@ -575,3 +576,408 @@
     flex-direction: column;
   }
 }
+
+
+
+
+/////////////////
+.home-hero {
+  position: relative;
+  background: white;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 2rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent);
+  }
+
+  .hero-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: center;
+    margin-bottom: 4rem;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  .hero-text {
+    position: relative;
+    z-index: 2;
+
+    .hero-subtitle {
+      font-size: 0.9rem;
+      letter-spacing: 3px;
+      color: #2c5282;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      color: #1a202c;
+
+      .highlight {
+        font-weight: 700;
+        color: #2c5282;
+        position: relative;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 5px;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: linear-gradient(90deg, #2c5282, #63b3ed);
+          opacity: 0.3;
+        }
+      }
+
+      @media (max-width: 768px) {
+        font-size: 2.5rem;
+      }
+    }
+
+    .hero-process {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #4a5568;
+      margin-bottom: 2rem;
+      position: relative;
+      padding-left: 1.5rem;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 5px;
+        height: 80%;
+        background: linear-gradient(to bottom, #2c5282, #63b3ed);
+        border-radius: 3px;
+      }
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #4a5568;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+
+      .ingredients {
+        display: block;
+        margin-top: 1rem;
+        font-style: italic;
+        color: #2d3748;
+        background: linear-gradient(120deg, rgba(44, 82, 130, 0.05) 0%, rgba(99, 179, 237, 0.05) 100%);
+        padding: 1rem;
+        border-radius: 8px;
+        border-left: 3px solid #63b3ed;
+      }
+    }
+
+    .hero-button {
+      background: linear-gradient(135deg, #2c5282 0%, #3182ce 100%);
+      color: white;
+      border: none;
+      padding: 1.2rem 2.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 20px rgba(44, 82, 130, 0.2);
+      position: relative;
+      overflow: hidden;
+
+      .button-text {
+        letter-spacing: 1px;
+      }
+
+      .button-icon {
+        font-size: 1.2rem;
+        transition: transform 0.3s ease;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s ease;
+      }
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(44, 82, 130, 0.3);
+
+        .button-icon {
+          transform: translateX(5px);
+        }
+
+        &::before {
+          left: 100%;
+        }
+      }
+    }
+  }
+
+  .hero-gallery {
+    position: relative;
+
+    .gallery-container {
+      position: relative;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 1.5rem;
+      aspect-ratio: 1;
+      max-width: 600px;
+      margin: 0 auto;
+
+      @media (max-width: 1024px) {
+        max-width: 500px;
+      }
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s ease;
+      background: white;
+
+      .image-wrapper {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .gallery-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+      }
+
+      .image-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+        color: white;
+        padding: 1.5rem;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+        text-align: center;
+        
+        span {
+          font-size: 0.9rem;
+          font-weight: 500;
+          letter-spacing: 1px;
+        }
+      }
+
+      &:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+
+        .gallery-image {
+          transform: scale(1.1);
+        }
+
+        .image-overlay {
+          transform: translateY(0);
+        }
+      }
+    }
+
+    // Individualni efekti za svaku sliku
+    .item-1 {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .item-2 {
+      grid-column: 2;
+      grid-row: 1;
+      transform: translateY(20px);
+      
+      &:hover {
+        transform: translateY(10px);
+      }
+    }
+
+    .item-3 {
+      grid-column: 1;
+      grid-row: 2;
+      transform: translateY(-20px);
+      
+      &:hover {
+        transform: translateY(-30px);
+      }
+    }
+
+    .item-4 {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .floating-badge {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      
+      .badge-content {
+        background: linear-gradient(135deg, #2c5282, #63b3ed);
+        color: white;
+        padding: 2rem;
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(44, 82, 130, 0.3);
+        animation: float 3s ease-in-out infinite;
+        
+        .badge-text {
+          font-size: 0.8rem;
+          font-weight: 600;
+          line-height: 1.2;
+        }
+      }
+    }
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    .scroll-indicator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      
+      .scroll-text {
+        font-size: 0.8rem;
+        color: #718096;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      
+      .scroll-line {
+        width: 1px;
+        height: 60px;
+        background: linear-gradient(to bottom, #2c5282, transparent);
+        animation: scrollLine 2s infinite;
+      }
+    }
+  }
+}
+
+// Animacije
+@keyframes float {
+  0%, 100% {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-10px);
+  }
+}
+
+@keyframes scrollLine {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  50% {
+    height: 60px;
+    opacity: 1;
+  }
+  100% {
+    height: 0;
+    opacity: 0;
+    transform: translateY(60px);
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .home-hero {
+    padding: 1rem;
+    
+    .hero-content {
+      gap: 2rem;
+    }
+    
+    .hero-text {
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      
+      .hero-process {
+        font-size: 1.2rem;
+      }
+      
+      .hero-description {
+        font-size: 1rem;
+      }
+    }
+    
+    .gallery-grid {
+      gap: 1rem;
+    }
+    
+    .floating-badge {
+      display: none;
+    }
+  }
+}
+
+
+

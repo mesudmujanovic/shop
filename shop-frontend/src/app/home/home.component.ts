@@ -3,11 +3,12 @@ import { Product, ProductService } from '../service/product.service';
 import { CommonModule } from '@angular/common';
 import { CartItem, CartService } from '../service/cart.service';
 import { Router, RouterModule } from '@angular/router';
+import { CategorySliderComponent } from '../category-slider/category-slider.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, CategorySliderComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -17,7 +18,50 @@ export class HomeComponent {
   isAnimating = false;
   slidesPerView = 3;
   maxSlides = 0;
-
+  categories: any[] = [
+    {
+      image: '/categoryimg/eye-care-615395.webp',
+      alt: 'Eye Care',
+      title: 'Nega Očiju',
+      description: 'Specjalizovani proizvodi za njegu osetljive kože oko očiju, redukciju bora i podmlađivanje.',
+      url: '/categories/eye-care'
+    },
+    {
+      image: '/categoryimg/serums-269049.webp',
+      alt: 'Serums',
+      title: 'Serumi',
+      description: 'Koncentrovane formule sa aktivnim sastojcima za ciljano rešavanje specifičnih kožnih problema.',
+      url: '/categories/serums'
+    },
+    {
+      image: '/categoryimg/scrub-peeling-221741.webp',
+      alt: 'Scrub & Peeling',
+      title: 'Peeling',
+      description: 'Proizvodi za dubinsko čišćenje, uklanjanje mrtvih ćelija i obnavljanje prirodnog sjaja kože.',
+      url: '/categories/scrub-peeling'
+    },
+    {
+      image: '/categoryimg/night-treatments-423459.webp',
+      alt: 'Night Treatments',
+      title: 'Noćna Nega',
+      description: 'Intenzivni tretmani za regeneraciju kože tokom noći i buđenje sveže, odmorne kože.',
+      url: '/categories/night-treatments'
+    },
+    {
+      image: '/categoryimg/face-creams-165019.webp',
+      alt: 'Face Creams',
+      title: 'Kreme za Lice',
+      description: 'Bogate hidratantne kreme za svakodnevnu zaštitu i negu svih tipova kože.',
+      url: '/categories/face-creams'
+    },
+    {
+      image: '/categoryimg/eye-care-615395.webp',
+      alt: 'Premium Eye Care',
+      title: 'Premium Nega',
+      description: 'Ekskluzivna kolekcija sa najkvalitetnijim sastojcima za vrhunski tretman.',
+      url: '/categories/premium'
+    }
+  ];
   constructor(
     private productService: ProductService,
     private router: Router,
@@ -307,4 +351,6 @@ export class HomeComponent {
       }
     });
   }
+
+  
 }
